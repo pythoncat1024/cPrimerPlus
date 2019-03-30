@@ -1,22 +1,10 @@
 #include <stdio.h>
 
-void br(void);
-void ic(void);
-
 int main(void){
-    br();
-    ic();
-    printf("\n");
-    ic();
-    printf("\n");
-    br();
-    printf("\n");
+    int toes;
+    toes = 10;
+    int dt = toes * 2;
+    int tt = toes * toes;
+    printf("toes:%d , double toes:%d , squre toes:%d\n",toes,dt,tt);
     return 0;
-}
-
-void br(void){
-    printf("Brazil, Russia, ");
-}
-void ic(void){
-    printf("India, China, ");
 }
