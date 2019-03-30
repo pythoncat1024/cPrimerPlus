@@ -1,9 +1,19 @@
 #include <stdio.h>
 
-// 编写一个程序，把年龄换成天数，不考虑闰年
+void jolly();
+void deny();
+
 int main() {
-    int age = 29;
-    int days = age*365;
-    printf("age %d equals %d days",age,days);
+    jolly();
+    jolly();
+    jolly();
+    deny();
     return 0;
+}
+
+void jolly(void){
+    printf("For he's jolly good fellow!\n");
+}
+void deny(void){
+    printf("Which nobody can deny!\n");
 }
