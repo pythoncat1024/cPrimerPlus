@@ -1,8 +1,12 @@
 #include <stdio.h>
 
 int main(void){
-    printf("\a");
-    printf("Startled by the sudden sound, Sally shouted,\n"
-            "\"By the Great Pumpkin, what was that!\"\n");
+    float input;
+    printf("Enter a floating-point value: ");
+    scanf("%f",&input);
+    printf("fixed-point notation:%f\n",input);
+    printf("exponetial notation:%e\n",input);
+    printf("p e notation:%ae\n",input);
+    printf("p notation:%a\n",input);
     return 0;
 }
