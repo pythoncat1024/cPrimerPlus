@@ -1,10 +1,20 @@
 #include <stdio.h>
 
+void smile(void);
+
 int main(void){
-    int toes;
-    toes = 10;
-    int dt = toes * 2;
-    int tt = toes * toes;
-    printf("toes:%d , double toes:%d , squre toes:%d\n",toes,dt,tt);
+    smile();
+    smile();
+    smile();
+    printf("\n");
+    smile();
+    smile();
+    printf("\n");
+    smile();
+    printf("\n");
     return 0;
+}
+
+void smile(void){
+    printf("Smile!");
 }
