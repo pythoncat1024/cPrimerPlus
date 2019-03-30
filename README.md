@@ -1,2 +1,2 @@
 # cPrimerPlus
-code for C Primer Plus
+code for C Primer Plus (Sixth Edition)
