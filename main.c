@@ -1,19 +1,22 @@
 #include <stdio.h>
 
-void jolly();
-void deny();
+void br(void);
+void ic(void);
 
-int main() {
-    jolly();
-    jolly();
-    jolly();
-    deny();
+int main(void){
+    br();
+    ic();
+    printf("\n");
+    ic();
+    printf("\n");
+    br();
+    printf("\n");
     return 0;
 }
 
-void jolly(void){
-    printf("For he's jolly good fellow!\n");
+void br(void){
+    printf("Brazil, Russia, ");
 }
-void deny(void){
-    printf("Which nobody can deny!\n");
+void ic(void){
+    printf("India, China, ");
 }
