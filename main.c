@@ -1,16 +1,27 @@
 #include <stdio.h>
 
-// 1品脱=2杯，1杯=8盎司，1盎司=2大汤勺，1大汤勺=3茶勺
-// 根据输入的杯数，输出对应的品脱，盎司，大汤勺，茶勺的对应数值。
 int main(void){
-    printf("你有几杯水，现在：");
-    int bei;
-    scanf("%d",&bei);
-    float pintuo = bei/2.0F;
-    int angsi = 8*bei;
-    int tangshao = bei * 8 * 2;
-    int chashao = bei * 8 *2 * 3;
-    printf("%d 杯 = %.01f 品脱 = %d 盎司 = %d 大汤勺 = %d 茶勺\n",
-            bei , pintuo , angsi , tangshao , chashao);
+    const int a = 12;
+    const int b = 2008;
+    const float c = 12.5F;
+    const double d = 3.1215927;
+    const char name[40] = "Tomcat";
+    const float cash = 31.259F;
+
+    printf("The [%10.5s] family just may be $[%-3.2f] dollars richer!\n",name,cash);
+
+    printf("[%9d],[% 9d],[%09d],[%-9d]\n\n",a,a,a,a);
+    printf("[%8.2f],[%-8.2f],[% 8.2f],[%#x],[%#o],[%#8.2f]\n\n",
+            c,c,c,a,b,c);
+    printf("[%g],[%#g],[%#e],[%7.0g],[%3.1e],[%%],[%#E],[%a]",
+            d,d,d,d,d,d,d);
     return 0;
 }
+/*
+ * 输出如下:
+[       12],[       12],[000000012],[12       ]
+
+[   12.50],[12.50   ],[   12.50],[0xc],[03730],[   12.50]
+
+[3.12159],[3.12159],[3.121593e+00],[      3],[3.1e+00],[%],[3.121593E+00],[0x1.8f90597ef756ep+1]
+ */
