@@ -2,11 +2,10 @@
 #include <string.h>
 
 int main(void){
-    char ln[30];
-    char fn[30];
-    printf("input your lastname and firstname (ln fn):");
-    scanf("%s",ln);
-    scanf("%s",fn);
-    printf("\"%s%20s\"\n", ln,fn);
+    printf("input a float number:");
+    float num;
+    scanf("%g",&num);
+    printf("number == %.1f or %.1e\n", num,num);
+    printf("number == %+.3f or %E\n", num,num);
     return 0;
 }
