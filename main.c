@@ -7,6 +7,6 @@ int main(void){
     printf("input your lastname and firstname (ln fn):");
     scanf("%s",ln);
     scanf("%s",fn);
-    printf("\"%s,%s\"\n", ln,fn);
+    printf("\"%s%20s\"\n", ln,fn);
     return 0;
 }
