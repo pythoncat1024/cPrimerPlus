@@ -2,12 +2,16 @@
 #include <string.h>
 
 int main(void){
-    printf("请输入当前网速(Mb/s)以及要下载的文件大小(MB):");
-    float speed, size;
-    scanf("%f %f", &speed, &size);
-    float sec = size / speed;
-    printf("At %.2f megabites per second, a file of %.2f megabytes"
-            " downloads in %.2f seconds.\n" ,
-            speed , size , sec);
+    char name[20];
+    char ln[20];
+    printf("input your first name:");
+    scanf("%s" , name);
+    printf("input your last name:");
+    scanf("%s" , ln);
+
+    int len_name = strlen(name);
+    int len_ln = strlen(ln);
+    printf("%-20s %-20s\n", name , ln);
+    printf("%-20d %-20d\n" , len_name , len_ln);
     return 0;
 }
