@@ -1,13 +1,12 @@
 #include <stdio.h>
-#define FORMAT "%s! C is cool!\n"
+#define G 'g'
 
-int main(void){
-    int num = 10;
-    printf(FORMAT , FORMAT);
-    printf("%d\n" , ++num);
-    printf("%d\n" , num++);
-    printf("%d\n" , num--);
-    printf("%d\n" , num);
+int main(void) {
 
+    char ch = 'a' -1 ;
+    while( ch++ < G ) {
+        printf("%5c" , ch);
+    }
+    printf("\n");
     return 0;
 }
