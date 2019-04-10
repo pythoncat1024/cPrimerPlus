@@ -1,23 +1,15 @@
 #include <stdio.h>
-#define HOUR 60
 
 int main(void) {
-    int mins;
-    do {
-        printf("输入分钟数( <=0 quit ): ");
-        scanf("%d" , &mins);
-        if (mins <=0 ) {
-            break;
-        }
-        int hour = mins / HOUR;
-        int min = mins % HOUR;
-        if (hour == 0) {
-            printf("spent: %d mins.\n" , min);
-        } else {
-            printf("spent: %d hours and %d mins.\n" , hour , min);
-        }
-    } while (mins > 0);
-
-    printf("end.\n");
+    int num;
+    printf("请随便输入一个整数，我将打印[n,n+10]：");
+    scanf("%d" , &num);
+    const int max = num + 10;
+    while (num <= max) {
+        printf("%d\t", num);
+        num++;
+    }
+    num--;
+    printf("\n");
     return 0;
 }
