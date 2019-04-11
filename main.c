@@ -1,17 +1,18 @@
 #include <stdio.h>
-#define WEEK 7
-int main(void) {
-    printf("天数转周数+天数了，请输入天数：");
-    int days;
-    scanf("%d" , &days);
-    while (days > 0) {
+#include <math.h>
 
-        int w = days / WEEK;
-        int d = days % WEEK;
-        printf("%d days are %d weeks, %d days.\n" , days , w , d);
-        printf("天数转周数+天数了，请输入天数：");
-        scanf("%d" , &days);
-    }
-    printf("\n ### 输入不合法。###\n");
+double m3(double src);
+
+int main(void) {
+    printf("输入一个数字，得到其的立方值：");
+    double input;
+    scanf("%lf" , &input);
+    double result = m3(input);
+
+    printf("%.2f 's m3 == %.2f\n" , input ,result);
     return 0;
+}
+
+double m3(double src) {
+    return pow(src,3);
 }
