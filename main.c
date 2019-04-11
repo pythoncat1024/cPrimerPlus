@@ -1,18 +1,18 @@
 #include <stdio.h>
-#include <math.h>
-
-double m3(double src);
 
 int main(void) {
-    printf("输入一个数字，得到其的立方值：");
-    double input;
-    scanf("%lf" , &input);
-    double result = m3(input);
-
-    printf("%.2f 's m3 == %.2f\n" , input ,result);
+    printf("This program computes moduli.\n");
+    printf("Enter an integer to serve as the second operand (<= 0 to quit): ");
+    int op1 , op2 , result;
+    scanf("%d" , &op2);
+    printf("Now enter the first operand: ");
+    scanf("%d" , &op1);
+    while( op1 > 0 ) {
+        result = op1 % op2;
+        printf("%d %% %d is %d\n" , op1 , op2 , result);
+        printf("Enter next number for first operand (<= 0 to quit): ");
+        scanf("%d" , &op1);
+    }
+    printf("Done\n");
     return 0;
-}
-
-double m3(double src) {
-    return pow(src,3);
 }
