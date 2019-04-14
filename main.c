@@ -1,16 +1,31 @@
 #include <stdio.h>
+#define SIZE 50
 
 int main(void)
 {
-    printf("请输入两个整数 m , n ( m < n ): ");
-    int m , n;
-    scanf("%d %d" , &m , &n);
-    long int m2 , m3;
-    for( int i = m ; i <= n ; i++ )
+    printf("输入一个单词: ");
+    char word[SIZE];
+    int pos = 0;
+    while( scanf("%c" , &word[pos])
+            && pos < SIZE
+            && word[pos] != ' '
+            && word[pos] != '\n')
     {
-        m2 = i * i;
-        m3 = i * i * i;
-        printf("%3d %6ld %6ld\n" , i , m2 , m3);
+        pos++ ;
     }
-    return 0;
+    if( pos < SIZE )
+    {
+        word[pos] = '\0';
+    }
+    for(int i=0 ; i < pos ; i++)
+    {
+        printf("%c" , word[i]);
+    }
+    printf("\n");
+    for(int i=pos -1 ; i >= 0 ; i--){
+        printf("%c" , word[i]);
+    }
+    printf("\n");
+
+    // printf("\n word ===#%s#\n" , word);
 }
