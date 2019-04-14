@@ -1,31 +1,17 @@
 #include <stdio.h>
-#define SIZE 50
 
 int main(void)
 {
-    printf("输入一个单词: ");
-    char word[SIZE];
-    int pos = 0;
-    while( scanf("%c" , &word[pos])
-            && pos < SIZE
-            && word[pos] != ' '
-            && word[pos] != '\n')
+    printf("请输入两个浮点数, 间隔一个空格: ");
+    float a , b;
+    float r;
+    while ( 2 == scanf("%f %f" , &a , &b) )
     {
-        pos++ ;
+        r = (a-b) / (a*b);
+        printf("result of [(%.2f - %.2f) / (%.2f * %.2f)] = %.2f\n" ,
+                a , b , a ,b ,r);
+    printf("请输入两个浮点数, 间隔一个空格: ");
     }
-    if( pos < SIZE )
-    {
-        word[pos] = '\0';
-    }
-    for(int i=0 ; i < pos ; i++)
-    {
-        printf("%c" , word[i]);
-    }
-    printf("\n");
-    for(int i=pos -1 ; i >= 0 ; i--){
-        printf("%c" , word[i]);
-    }
-    printf("\n");
-
-    // printf("\n word ===#%s#\n" , word);
+    printf("非法输入 Done. \n");
+    return 0;
 }
