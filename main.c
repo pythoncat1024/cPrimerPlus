@@ -1,13 +1,15 @@
 #include <stdio.h>
-#define LAST 'A'
-#define CHAR 'F'
+#define A 'A'
+#define ROW 6
+
 int main(void)
 {
-    for( char i = CHAR ; i >= LAST  ; i-- )
+    char i , c , j ;
+    for( i = 0 , c = A ; i < ROW ; i++ )
     {
-        for( char j = CHAR ; j >= i ; j-- )
+        for ( j = 0; j <= i ; j++ , c++ )
         {
-            printf("%c" , j);
+            printf("%c" , c);
         }
         printf("\n");
     }
