@@ -1,40 +1,16 @@
 #include <stdio.h>
-#define A 'A'
-#define CHAR 'F'
 
 int main(void)
 {
-    printf("请输入金字塔字符（A-Z）：");
-    char target;
-    target = CHAR;
-    scanf("%c" , &target);
-    const int row = target - A + 1 ;
-    const int max_column_size = (target - A) * 2 + 1;
-    for( int i = 0; i < row ; i++ )
+    printf("请输入两个整数 m , n ( m < n ): ");
+    int m , n;
+    scanf("%d %d" , &m , &n);
+    long int m2 , m3;
+    for( int i = m ; i <= n ; i++ )
     {
-        int abc = 2*i + 1; // 每行字母的数量
-        int each_space = (max_column_size - abc) / 2; // 每行前后的空格数量
-        int pos;
-        char ch; // 待打印的字符
-        for( pos = 0; pos < each_space ; pos++ )
-        {
-            printf(" ");
-        }
-
-        for ( pos = 0 , ch = A ; pos < abc/2 ; pos++ , ch++ )
-        {
-            printf("%c" , ch);
-        }
-        printf("%c" , ch);
-        for ( pos = 0 , ch = ch -1 ; pos < abc/2 ; pos++ , ch-- )
-        {
-            printf("%c" , ch);
-        }
-        for ( pos = 0 ; pos < each_space ; pos++ )
-        {
-            printf(" ");
-        }
-        printf("\n");
+        m2 = i * i;
+        m3 = i * i * i;
+        printf("%3d %6ld %6ld\n" , i , m2 , m3);
     }
     return 0;
 }
