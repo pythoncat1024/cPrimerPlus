@@ -1,15 +1,12 @@
 #include <stdio.h>
-
+#define CHAR '$'
+#define COLUMN 6
+#define ROW 4
 int main(void)
 {
-    int i,j;
-    int list[10];
-    for( int i = 1; i <= 10 ; i++ )
-    {
-        list[i] = 2 * i + 3;
-        for( j = 1 ; j <= i ; j++ )
-        {
-            printf(" %d" , list[j]);
+    for(int i=0; i<ROW ; i++) {
+        for( int j=0;j<COLUMN; j++ ) {
+            printf("%c" , CHAR);
         }
         printf("\n");
     }
