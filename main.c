@@ -1,18 +1,18 @@
 #include <stdio.h>
-
+#include <math.h>
 int main(void)
 {
-    const int max = 100;
-    double r = 0;
-    int flag;
-    for(int i=1 ; i <= max ; i++)
+    int arr[8];
+    for(int i=0; i<8 ; i++)
     {
-        if ( i%2 )
-            flag = 1;
-        else
-            flag = -1;
-        r += 1.0 / i * flag;
+        arr[i] = (int) pow(2,i);
     }
-    printf("r = %f\n" , r);
+
+    int pos = 0;
+    do
+    {
+        printf("arr[%d] = %d\n" , pos , arr[pos]);
+        pos++ ;
+    } while(pos < 8);
     return 0;
 }
