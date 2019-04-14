@@ -1,9 +1,8 @@
 #include <stdio.h>
 int main(void)
 {
-    int k;
-    for( k =1, printf("%d:Hi!\n", k) ; printf("k = %d\n",k) ,
-            k * k < 26 ; k += 2 , printf("Now k is %d\n" , k))
-        printf("k is %d in the loop\n" , k);
+    char abc[] = "abcdefghijklmnopqrstuvwxyz";
+    for( int index = 0 ; index < 26 ; index++ )
+        printf("%c " , abc[index]);
     return 0;
 }
