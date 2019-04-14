@@ -2,11 +2,17 @@
 
 int main(void)
 {
-    int arr[8] = {1, 2, 3, 4, 5, 6, 7, 8};
-    for(int i=8-1 ; i>=0 ; i--)
+    const int max = 100;
+    double r = 0;
+    int flag;
+    for(int i=1 ; i <= max ; i++)
     {
-        printf("%d ",arr[i]);
+        if ( i%2 )
+            flag = 1;
+        else
+            flag = -1;
+        r += 1.0 / i * flag;
     }
-    printf("\n");
+    printf("r = %f\n" , r);
     return 0;
 }
