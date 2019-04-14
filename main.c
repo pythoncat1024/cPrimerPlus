@@ -1,14 +1,9 @@
 #include <stdio.h>
-#define CHAR '$'
-#define COLUMN 6
-#define ROW 4
 int main(void)
 {
-    for(int i=0; i<ROW ; i++) {
-        for( int j=0;j<COLUMN; j++ ) {
-            printf("%c" , CHAR);
-        }
-        printf("\n");
-    }
+    int k;
+    for( k =1, printf("%d:Hi!\n", k) ; printf("k = %d\n",k) ,
+            k * k < 26 ; k += 2 , printf("Now k is %d\n" , k))
+        printf("k is %d in the loop\n" , k);
     return 0;
 }
