@@ -2,17 +2,16 @@
 
 int main(void)
 {
-    printf("请输入预期天数：");
-    int days;
-    scanf("%d" , &days);
-
-    int count;
-    long int sum;
-    count = 0;
-    sum = 0;
-    while (count++ < days)
-        sum = sum + count * count;
-    printf("总收益为 sum = %ld\n" , sum);
-
+    int i,j;
+    int list[10];
+    for( int i = 1; i <= 10 ; i++ )
+    {
+        list[i] = 2 * i + 3;
+        for( j = 1 ; j <= i ; j++ )
+        {
+            printf(" %d" , list[j]);
+        }
+        printf("\n");
+    }
     return 0;
 }
