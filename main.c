@@ -6,12 +6,13 @@ int main(void)
     int days;
     scanf("%d" , &days);
 
-    int count , sum;
+    int count;
+    long int sum;
     count = 0;
     sum = 0;
     while (count++ < days)
-        sum = sum + count;
-    printf("总收益为 sum = %d\n" , sum);
+        sum = sum + count * count;
+    printf("总收益为 sum = %ld\n" , sum);
 
     return 0;
 }
