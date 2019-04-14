@@ -2,24 +2,11 @@
 
 int main(void)
 {
-    int lower , upper;
-    printf("Enter lower and upper integer limits: ");
-    while ( 2 == scanf("%d %d" , &lower , &upper)
-            && lower < upper)
+    int arr[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    for(int i=8-1 ; i>=0 ; i--)
     {
-        long int x = lower * lower;
-        long int y = upper * upper;
-        long int z = 0;
-        long int fin;
-        for(int i = lower+1 ; i< upper ; i++ )
-        {
-            z += i * i;
-        }
-        fin = x + y + z;
-        printf("The sum of the squares from %ld to %ld is %ld\n" ,
-                x , y , fin);
-        printf("Enter lower and upper integer limits: ");
+        printf("%d ",arr[i]);
     }
-    printf("Done\n");
+    printf("\n");
     return 0;
 }
