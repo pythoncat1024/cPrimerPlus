@@ -1,13 +1,13 @@
 #include <stdio.h>
-#define LEN 5
-#define CHAR '$'
+#define LAST 'A'
+#define CHAR 'F'
 int main(void)
 {
-    for( char i = 0 ; i < LEN ; i++ )
+    for( char i = CHAR ; i >= LAST  ; i-- )
     {
-        for( char j = 0; j <= i ; j++ )
+        for( char j = CHAR ; j >= i ; j-- )
         {
-            printf("%c" , CHAR);
+            printf("%c" , j);
         }
         printf("\n");
     }
