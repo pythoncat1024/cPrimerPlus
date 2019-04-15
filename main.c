@@ -1,20 +1,21 @@
 #include <stdio.h>
-#define ORIGIN 100
-#define TEN 10
-#define FIVE 5
+#define FIVE 10000
+#define ORIGIN 100 * FIVE
+#define TAKE 10 * FIVE
+#define PERCENT 0.08
+
 int main(void)
 {
-    double dei = ORIGIN; // 5%
-    double dap = ORIGIN; // 10%
-
     int year = 0;
-    while(dap >= dei)
+    double rest = ORIGIN;
+    while(rest >= TAKE)
     {
         year++;
-        dap += ORIGIN * 0.1;
-        dei += dei * 0.05;
+        rest += rest * PERCENT;
+        rest -= TAKE;
     }
-    printf("after %d years, dei will over dap. dap=%.2lf ,dei=%.2lf\n" ,
-            year , dap , dei);
+
+    printf("after %d years , Lucky will rest %.2f$ \n" ,
+            year , rest);
     return 0;
 }
