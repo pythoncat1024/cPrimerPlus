@@ -1,21 +1,18 @@
 #include <stdio.h>
-#define FIVE 10000
-#define ORIGIN 100 * FIVE
-#define TAKE 10 * FIVE
-#define PERCENT 0.08
-
+#define FIVE 5
+#define NUMBER 150
+#define WEEK 20
 int main(void)
 {
-    int year = 0;
-    double rest = ORIGIN;
-    while(rest >= TAKE)
+    int friends = FIVE;
+    int weeks = 0;
+    while( friends < NUMBER /*|| weeks < WEEK */ )
     {
-        year++;
-        rest += rest * PERCENT;
-        rest -= TAKE;
+        weeks++;
+        friends -= weeks;
+        friends *= 2;
+        printf("at No.%d week , Rabund has %d friends.\n",
+                weeks , friends);
     }
-
-    printf("after %d years , Lucky will rest %.2f$ \n" ,
-            year , rest);
     return 0;
 }
