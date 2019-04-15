@@ -1,18 +1,34 @@
 #include <stdio.h>
-#include <math.h>
+#define SIZE 8
+
+double sum_arr(int index);
+
 int main(void)
 {
-    int arr[8];
-    for(int i=0; i<8 ; i++)
+    double arr1[SIZE];
+    double arr2[SIZE];
+    double tmp;
+    printf("请依次输入%d个数.\n", SIZE);
+    for( int i = 0; i < SIZE; i++ )
     {
-        arr[i] = (int) pow(2,i);
-    }
+        printf("请输入第 %d 个数: ", i+1 );
+        scanf("%lf" , &arr1[i]);
 
-    int pos = 0;
-    do
+        tmp = 0;
+        for(int k  = 0; k <= i; k++ ){
+            tmp += arr1[k];
+        }
+        arr2[i] = tmp;
+    }
+    for(int i = 0; i < SIZE; i++)
     {
-        printf("arr[%d] = %d\n" , pos , arr[pos]);
-        pos++ ;
-    } while(pos < 8);
+        printf("%8.2f", arr1[i]);
+    }
+    printf("\n");
+    for(int i = 0; i < SIZE; i++)
+    {
+        printf("%8.2f" , arr2[i]);
+    }
+    printf("\n");
     return 0;
 }
