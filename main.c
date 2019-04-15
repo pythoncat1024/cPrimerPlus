@@ -1,23 +1,20 @@
 #include <stdio.h>
-#define LENGTH 255
+#define ORIGIN 100
+#define TEN 10
+#define FIVE 5
 int main(void)
 {
-    printf("请输入一行文字:");
-    char str[LENGTH];
-    int pos = 0;
-    int read;
-    while( pos < LENGTH
-            && ( read = scanf("%c" , &str[pos]) ) == 1
-            && str[pos] != '\n')
-    {
-        pos++;
-    }
-    printf(" pos == %d\n" , pos);
-    if( pos == LENGTH )
-        str[pos-1] = '\0';
-    else
-        str[pos] = '\0';
+    double dei = ORIGIN; // 5%
+    double dap = ORIGIN; // 10%
 
-    printf("%s\n", str);
+    int year = 0;
+    while(dap >= dei)
+    {
+        year++;
+        dap += ORIGIN * 0.1;
+        dei += dei * 0.05;
+    }
+    printf("after %d years, dei will over dap. dap=%.2lf ,dei=%.2lf\n" ,
+            year , dap , dei);
     return 0;
 }
