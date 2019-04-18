@@ -1,18 +1,22 @@
 #include <stdio.h>
-#define FIVE 5
-#define NUMBER 150
-#define WEEK 20
+#include <ctype.h>
 int main(void)
 {
-    int friends = FIVE;
-    int weeks = 0;
-    while( friends < NUMBER /*|| weeks < WEEK */ )
+    printf("请输入任意一串字符:");
+    char ch;
+    // ( ch = getchar ) != -1 ; 加括号的原因是赋值运算符优先级最低，低于比较运算符
+    while( ( ch = getchar() ) != '\n' )
     {
-        weeks++;
-        friends -= weeks;
-        friends *= 2;
-        printf("at No.%d week , Rabund has %d friends.\n",
-                weeks , friends);
+        if( isalpha(ch) )
+        {
+             putchar( ch+1 );
+        }
+        else
+        {
+            putchar( ch );
+        }
     }
+    putchar( ch );
     return 0;
+
 }
