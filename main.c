@@ -3,28 +3,21 @@
 
 int main(void)
 {
-    printf("随便你怎么输入，我只识别第一个字符，#结束:\n");
+    printf("随便输入，#号结束:\n");
     char ch;
-
+    int n_spaces = 0;
+    int n_lines = 0;
+    int n_others = 0;
     while( (ch = getchar()) != '#' )
     {
-        if (ch == '\n')
-            continue;
-        switch(ch)
-        {
-            case 'a':
-                printf("char === %c\n",ch);
-                break;
-            case 'b':
-                printf("char === %c\n", ch);
-                break;
-            default:
-                break;
-        }
-
-        while(getchar() != '\n')
-            continue; // 直接不处理，再次进入小小循环
+        if(isspace(ch) && ch !='\n')
+            n_spaces++;
+        else if( ch == '\n' )
+            n_lines++;
+        else
+            n_others++;
     }
-    printf("last char = %c\n , Done!\n", ch);
+    printf("this input contains %d space and %d lines and %d others\n",
+            n_spaces, n_lines, n_others);
     return 0;
 }
