@@ -1,46 +1,30 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <stdbool.h>
-#define STOP '|'
-#define NEXT '\n'
 
-int main(void) {
-    bool in_word = false; // 开始一个单词
-    int n_chars, n_lines, n_words;
-    char ch, prev;
-    n_chars = n_lines = n_words = 0;
-    prev = '\n';
-    printf("统计行数，字符数，单词数( | to quit ):\n");
+int main(void)
+{
+    printf("随便你怎么输入，我只识别第一个字符，#结束:\n");
+    char ch;
 
-    while( (ch = getchar()) != STOP ) {
-        if( isalpha(ch) )
-            n_chars++;
+    while( (ch = getchar()) != '#' )
+    {
+        if (ch == '\n')
+            continue;
+        switch(ch)
+        {
+            case 'a':
+                printf("char === %c\n",ch);
+                break;
+            case 'b':
+                printf("char === %c\n", ch);
+                break;
+            default:
+                break;
+        }
 
-        if( !in_word && !isspace(ch) ) {
-            in_word = true;
-            n_words++;
-        }
-        else if( in_word && isspace(ch) ) {
-            in_word = false;
-        }
-        if( ch == NEXT ) {
-            n_lines++;
-        }
-        prev = ch;
-        //printf("--- total lines = %d , total words = %d , total chars = %d\n",
-        //    n_lines, n_words, n_chars);
+        while(getchar() != '\n')
+            continue; // 直接不处理，再次进入小小循环
     }
-
-    if( prev != NEXT ) {
-        // last char == '|'
-        n_lines++;
-        n_words++;
-    }
-
-    // printf("prev = %c\n",prev);
-
-    printf("total lines = %d , total words = %d , total chars = %d\n",
-            n_lines, n_words, n_chars);
+    printf("last char = %c\n , Done!\n", ch);
     return 0;
-
 }
