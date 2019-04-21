@@ -10,20 +10,17 @@ int main(void)
     int replace = 0;
     while( (ch = getchar()) != STOP )
     {
-        if( ch == POINT )
+        switch( ch )
         {
-            //printf("%c", RP);
-            replace++;
-        }
-        else if ( ch == RP )
-        {
-            //printf("%c%c", RP, RP);
-            replace++;
-        }
-        else
-        {
-            //putchar(ch);
-            ;
+            case POINT:
+                //printf("%c", RP);
+                replace++;
+                break;
+            case RP:
+                //printf("%c%c", RP, RP);
+                replace++;
+                break;
+            default:break;
         }
     }
     printf("\n");
