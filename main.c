@@ -2,11 +2,12 @@
 
 int main(void)
 {
-    printf("input anything\n");
     char ch;
+    int count = 0;
     while( (ch = getchar()) != EOF )
     {
-        putchar(ch);
+        count++;
     }
+    printf("count of input = %d\n", count);
     return 0;
 }
