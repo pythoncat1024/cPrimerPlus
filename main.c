@@ -1,18 +1,31 @@
 #include <stdio.h>
 
-void up_and_down(int num);
+long int fact(int num);
+long int loop_fact(int num);
 
 int main(void)
 {
-    up_and_down(1);
+    long int five = fact(5);
+    printf("fact 5 = %ld\n", five);
+    printf("loop fact 5 = %ld\n", loop_fact(5));
     return 0;
 }
 
-void up_and_down(int count)
+long int loop_fact(int num)
 {
-    printf("B Level %d , location:%p\n", count, &count);
-    if( count < 4 ){
-        up_and_down(count+1);
+    long int total = 1;
+    for(int i=1; i<=num; i++)
+    {
+        total *= i;
     }
-    printf("EE LEVEL %d , location:%p\n", count, &count);
+    return total;
+}
+
+long int fact(int n)
+{
+    if( n<=0 ) {
+        return 1;
+    } else {
+        return n * fact(n-1);
+    }
 }
