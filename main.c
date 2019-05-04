@@ -1,31 +1,24 @@
 #include <stdio.h>
 
-long int fact(int num);
-long int loop_fact(int num);
+void binary(int num);
 
 int main(void)
 {
-    long int five = fact(5);
-    printf("fact 5 = %ld\n", five);
-    printf("loop fact 5 = %ld\n", loop_fact(5));
+    int input = 13;
+    printf("输入正整数，将其转换为二级制显示：");
+    scanf("%d", &input);
+    printf("%d toBinary equals 0b", input);
+    binary(input);
+    printf("\n");
     return 0;
 }
 
-long int loop_fact(int num)
+// 逻辑就是，将一个数 %2 ，得到第一位，然后将该数 /2 ，再次 %2，得到第二位
+// 通过递归刚好做到倒序打印，即先打印最后以为，再以此向前打印
+void binary(int n)
 {
-    long int total = 1;
-    for(int i=1; i<=num; i++)
-    {
-        total *= i;
+    if( n > 1 ){
+        binary( n/2 );
     }
-    return total;
-}
-
-long int fact(int n)
-{
-    if( n<=0 ) {
-        return 1;
-    } else {
-        return n * fact(n-1);
-    }
+    printf("%d", n%2);
 }
