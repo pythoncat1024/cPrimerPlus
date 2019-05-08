@@ -1,34 +1,44 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 
-int index_of(char ch);
-
+double power(double a, int b);
 int main(void)
 {
-    printf("please input a char: ");
+    printf("请输入一个数，及其幂（比如2,3 表示2的3次方）: ");
+    double x;
+    int y;
     char ch;
-    while( (ch = getchar())!=EOF )
+    while( 2 != scanf("%lf %d", &x, &y) )
     {
-        int r = index_of(ch);
-        printf("position of %c in abc is %d\n", ch, r);
+        while( (ch = getchar())!='\n' )
+            putchar(ch);
+        printf(" is not 2 valid number.\nplease try again:");
     }
+    double d = power(x, y);
+    printf("%g 的%d 次方 = %g\n", x, y, d);
     return 0;
 }
 
-int index_of(char ch)
+double power(double a, int b)
 {
-    int index = -1;
-    char abc[] = "abcdefghijklmnopqrstuvwxyz";
-    if(isalpha(ch))
+    double d = 1;
+    if( a == 0 )
     {
-        for(int i=0; i<26;i++)
+        printf("0 的幂次未定义，不可计算！");
+        d = 0;
+    }
+    else
+    {
+        d = 1;
+        for(int i = 0; i < abs(b); i++)
         {
-            if(tolower(ch) == abc[i])
-            {
-                index = i+1;
-                break;
-            }
+            d *= a;
+        }
+        if(b < 0)
+        {
+            d = 1.0/d;
         }
     }
-    return index;
+    return d;
 }
