@@ -1,38 +1,43 @@
 #include <stdio.h>
-#include <ctype.h>
-// 将 n 转换为 x进制的数显示出来
-void to_base_n(int n, int x);
-int main(void)
-{
-    printf("请输入要转换的数字，以及目标进制。（比如85 2 表示的是将 85 转成二级制显示）: ");
-    int n,x;
-    int ch;
-    while( 2 != scanf("%d %d", &n, &x) )
-    {
-        while( (ch = getchar())!='\n' )
-        {
-            putchar(ch);
-        }
-        printf(" is not two number.\nplease try again: ");
+
+// 斐波那契数
+long fibonacci(long n);
+
+long r_fibonacci(long n);
+
+int main(void) {
+    printf("input a number to compute fibonacci num of this number: ");
+    long n;
+    while (1 != scanf("%ld", &n)) {
+        while (getchar() != '\n')
+            continue;
+        printf("illegal input!\nplease try again: ");
     }
-    if( x < 2 )
-    {
-        printf("至少应该是二进制，否则无法转换！");
-        return 0; // exit this method
-    }
-    printf("%d 的 %d进制表示为：", n, x);
-    to_base_n(n,x);
-    printf("\n");
+    printf("%ld's r fibonacci number is %ld\n", n, r_fibonacci(n));
+    printf("%ld's fibonacci number is %ld\n", n, fibonacci(n));
     return 0;
 }
 
-void to_base_n(int n,int x)
-{
-    int k = n % x;
-    int tmp = n / x;
-    if( tmp > 0 )
-    {
-        to_base_n(tmp, x);
+long fibonacci(long n) {
+    long d;
+    if (1 == n || 2 == n)
+        d = 1;
+    else {
+        long a = 1;
+        long b = 1;
+        for (long i = 3; i <= n; i++) {
+            d = b;
+            b = a + b;
+            a = d;
+            d = b; // ? ok ? ## ok!
+        }
     }
-    printf("%d",k);
+    return d;
+}
+
+long r_fibonacci(long n) {
+    if (n == 1 || n == 2)
+        return 1;
+    else
+        return r_fibonacci(n - 1) + r_fibonacci(n - 2);
 }
