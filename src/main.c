@@ -1,57 +1,38 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <stdlib.h>
-
-double power(double a, int b);
-double multi(double a, int b);
-
+// 将 n 转换为 x进制的数显示出来
+void to_base_n(int n, int x);
 int main(void)
 {
-    printf("请输入一个数，及其幂（比如2,3 表示2的3次方）: ");
-    double x;
-    int y;
-    char ch;
-    while( 2 != scanf("%lf %d", &x, &y) )
+    printf("请输入要转换的数字，以及目标进制。（比如85 2 表示的是将 85 转成二级制显示）: ");
+    int n,x;
+    int ch;
+    while( 2 != scanf("%d %d", &n, &x) )
     {
         while( (ch = getchar())!='\n' )
+        {
             putchar(ch);
-        printf(" is not 2 valid number.\nplease try again:");
+        }
+        printf(" is not two number.\nplease try again: ");
     }
-    double d = power(x, y);
-    printf("%g 的%d 次方 = %g\n", x, y, d);
+    if( x < 2 )
+    {
+        printf("至少应该是二进制，否则无法转换！");
+        return 0; // exit this method
+    }
+    printf("%d 的 %d进制表示为：", n, x);
+    to_base_n(n,x);
+    printf("\n");
     return 0;
 }
 
-double power(double a, int b)
+void to_base_n(int n,int x)
 {
-    double d = 1;
-    if( a == 0 )
+    int k = n % x;
+    int tmp = n / x;
+    if( tmp > 0 )
     {
-        printf("0 的幂次未定义，不可计算！");
-        d = 0;
+        to_base_n(tmp, x);
     }
-    else
-    {
-        if( b ==1 )
-        {
-            d = 1;
-        }
-        else
-        {
-            d = multi(a, abs(b));
-            if(b < 0)
-            {
-                d = 1.0/d;
-            }
-        }
-    }
-    return d;
-}
-
-double multi(double a, int b)
-{
-    if( b == 1 )
-        return a;
-    else
-        return multi(a, b-1) * a;
+    printf("%d",k);
 }
