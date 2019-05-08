@@ -1,14 +1,22 @@
 #include <stdio.h>
+#include <ctype.h>
 
-double min(double x,double y);
+void chline(char ch, int i,int j);
 int main(void)
 {
-    double a = 23;
-    double b = 21;
-    printf("min in %g,%g is %g\n", a, b, min(a,b));
-    return 0;
+    chline('s',3,5);
+   return 0;
 }
-double min(double xx,double yy)
+
+void chline(char c, int i, int j)
 {
-    return xx > yy ? yy : xx;
+    for(int x = 0; x < j; x++)
+    {
+        for(int y = 0; y < i; y++)
+        {
+            putchar(c);
+        }
+        putchar('\n');
+    }
 }
+
