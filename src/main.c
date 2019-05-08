@@ -3,6 +3,8 @@
 #include <stdlib.h>
 
 double power(double a, int b);
+double multi(double a, int b);
+
 int main(void)
 {
     printf("请输入一个数，及其幂（比如2,3 表示2的3次方）: ");
@@ -30,15 +32,26 @@ double power(double a, int b)
     }
     else
     {
-        d = 1;
-        for(int i = 0; i < abs(b); i++)
+        if( b ==1 )
         {
-            d *= a;
+            d = 1;
         }
-        if(b < 0)
+        else
         {
-            d = 1.0/d;
+            d = multi(a, abs(b));
+            if(b < 0)
+            {
+                d = 1.0/d;
+            }
         }
     }
     return d;
+}
+
+double multi(double a, int b)
+{
+    if( b == 1 )
+        return a;
+    else
+        return multi(a, b-1) * a;
 }
