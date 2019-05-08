@@ -1,4 +1,6 @@
-#! /bin/bash
+#!/usr/bin/env bash
+
+# clear.sh 用于清空 build.sh/run.sh/CLion 编译产生的任何文件或目录
 echo "********************************************"
 echo "start to clear build now!"
 echo "current project path:"$(pwd)
