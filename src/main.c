@@ -1,16 +1,23 @@
 #include <stdio.h>
 
-void show_point(int x);
-
+// 交换两个变量的值
+void swap(int* a,int* b);
 int main(void)
 {
-    int pooh = 24;
-    printf("n = %d,&n=%p\n", pooh, &pooh);
-    show_point(pooh);
+    int a = 13;
+    int b = 27;
+
+    printf("origin val: a=%d,b=%d\n", a, b);
+    swap(&a, &b);
+    printf("after swap: a=%d,b=%d\n", a, b);
     return 0;
 }
 
-void show_point(int n)
+void swap(int* x, int* y)
 {
-    printf("IN show_point(): n=%d,&n=%p\n", n, &n);
+    int temp = *x;
+    // 由 *x = *y 也可以看出 解引用对应的数据可以是左值，也可以是右值
+    *x = *y;
+    *y = temp;
 }
+
