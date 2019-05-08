@@ -1,14 +1,16 @@
 #include <stdio.h>
 
-#include "utils.h"
+void show_point(int x);
 
-int main(void) {
-    print_some();
-    int input = 13;
-    printf("输入正整数，将其转换为二级制显示：");
-    scanf("%d", &input);
-    printf("%d toBinary equals 0b", input);
-    binary(input);
-    printf("\n");
+int main(void)
+{
+    int pooh = 24;
+    printf("n = %d,&n=%p\n", pooh, &pooh);
+    show_point(pooh);
     return 0;
+}
+
+void show_point(int n)
+{
+    printf("IN show_point(): n=%d,&n=%p\n", n, &n);
 }

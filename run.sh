@@ -15,6 +15,10 @@ else
 fi
 # cmake and make
 cd ${build}
-cmake ../
-make
+cmake ../ 1>/dev/null
+make 1>/dev/null
+#clear # clear build outputs
 echo "build finish!"
+echo "execute this program:"
+echo ""
+./${PROJECT_NAME}
