@@ -1,33 +1,33 @@
 #include <stdio.h>
-#include <stdlib.h>
-#define YEAR 5
-#define MONTH 12
-#define MAX 100
+#define SIZE 4
 
-// 研究5年的每个月的降水量数据
-
+int sum(int * arr, int n);
+int sum_arr(int * start, int * end);
 int main(void)
 {
-    float rain[YEAR][MONTH] = {};
-    for( int i = 0; i < YEAR ; i++ )
-    {
-        for( int j =0; j < MONTH; j++ )
-        {
-            // 通过 rand 函数给元素赋值
-            rain[i][j] = rand() % MAX;
-        }
-    }
-
-    float total_m = 0; // 每个月的总降水量
-    for(int m = 0; m < MONTH; m++)
-    {
-        total_m = 0;
-        for(int y = 0; y < YEAR; y++)
-        {
-            total_m += rain[y][m];
-        }
-
-        printf(" 第 %d 月的平均降水量为：%g\n", m+1, total_m / YEAR);
-    }
-    return 0;
+    int arr[SIZE] = {5, 6, 7, 8};
+    printf("sum of arr = %d\n", sum(arr, SIZE));
+    printf("sum_arr = %d\n", sum_arr(arr,arr + SIZE));
 }
+
+int sum_arr(int * start, int * end)
+{
+    int total = 0;
+    while(start < end)
+    {
+        total += *start++;
+        // total += *start++; ===> total += *start; start++;
+    }
+    return total;
+}
+int sum(int * arr,int n)
+{
+    int total = 0;
+    for(int i = 0; i < n; i++)
+    {
+        total += *(arr + i);
+        // 指针+1，1对应的是一个元素长度
+    }
+    return total;
+}
+
