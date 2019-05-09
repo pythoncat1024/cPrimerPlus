@@ -1,30 +1,44 @@
 #include <stdio.h>
+// 深化二维数组的指针操作
 
-void show(const int * arr, int size);
-void multi(int * arr,int size, int x);
+int sum(int col, int row ,const int (*arr)[col]); // vla 变长数组{数组长度是变量}
+int sum2(const int (*arr)[2], int row);
 int main(void)
 {
-    int arr[3] = { 6, 3, 1 };
-    printf("before:\n");
-    show(arr, 3);
-    printf("after:\n");
-    multi(arr, 3, 10);
-    show(arr, 3);
+    int rain[3][2] = {
+        {1, 2}, {3, 4}, {5, 6}
+    };
+
+    printf("sum of rain == %d\n", sum(3, 2, rain));
+
+    printf("sum 2 of rain = %d\n", sum2(rain, 3));
+
+    // 数组的复合字面量表示，类似 double 的字面量 11.24 这种
+    printf("sum of complex = %d\n", sum(1,2, (int [2][1]){ {9},{7} }));
     return 0;
 }
-void multi(int * arr,int size,int x)
+int sum2(const int (*arr)[2], int row)
 {
-    for(int i = 0; i < size; i++)
+    int total = 0;
+    for(int i = 0; i < row; i++)
     {
-        *(arr + i) += x;
+        for(int j = 0; j < 2; j++)
+        {
+            total += arr[i][j];
+        }
     }
+    return total;
 }
 
-void show(const int * arr, int size)
+int sum(int col,int row, const int (*arr)[col])
 {
-    for(int i = 0; i < size; i++)
+    int total = 0;
+    for(int i = 0; i < row; i++)
     {
-        printf("%3d", *(arr + i));
+        for(int j = 0; j < col; j++)
+        {
+           total += *(*(arr + i) + j);
+        }
     }
-    printf("\n");
+    return total;
 }
