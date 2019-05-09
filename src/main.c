@@ -1,43 +1,32 @@
 #include <stdio.h>
-// 深化二维数组的指针操作
 
-int sum(int col, int row ,const int (*arr)[col]); // vla 变长数组{数组长度是变量}
-int sum2(const int (*arr)[2], int row);
+// 三维数组的求和尝试
+
+int sum3(int x, int y, int z, int (*arr)[y][z]); // 使用变长数组
 int main(void)
 {
     int rain[3][2] = {
-        {1, 2}, {3, 4}, {5, 6}
-    };
-
-    printf("sum of rain == %d\n", sum(3, 2, rain));
-
-    printf("sum 2 of rain = %d\n", sum2(rain, 3));
-
-    // 数组的复合字面量表示，类似 double 的字面量 11.24 这种
-    printf("sum of complex = %d\n", sum(1,2, (int [2][1]){ {9},{7} }));
-    return 0;
-}
-int sum2(const int (*arr)[2], int row)
-{
-    int total = 0;
-    for(int i = 0; i < row; i++)
-    {
-        for(int j = 0; j < 2; j++)
-        {
-            total += arr[i][j];
-        }
-    }
-    return total;
+        {1,2},{3,4},{5,6}
+    }; // 二维数组
+    int zoo[2][3][4] = {
+        1,2,3,4, 1,2,3,4, 1,2,3,4,
+        5,6,7,8, 5,6,7,8, 5,6,7,8
+    }; // 三维数组
+    printf("sum of three arr = %d\n", sum3(2, 3, 4, zoo));
 }
 
-int sum(int col,int row, const int (*arr)[col])
+int sum3(int x,int y,int z, int arr[][y][z])
 {
     int total = 0;
-    for(int i = 0; i < row; i++)
+    for(int a = 0; a < x; a++)
     {
-        for(int j = 0; j < col; j++)
+        for(int b = 0; b < y; b++)
         {
-           total += *(*(arr + i) + j);
+            for(int c = 0; c < z; c++)
+            {
+               total += *(*(*(arr + a) + b) +c);
+               // 等同于 total += arr[a][b][c];
+            }
         }
     }
     return total;
