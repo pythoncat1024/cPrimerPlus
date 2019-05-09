@@ -59,3 +59,12 @@
     *(p + 3) = 34; // ok
     p = &zoo[0]; // 编译失败，const指针不能被二次赋值
 ```
+基于指向`const`的指针，以及`const`指针，还可以有'指向`const`的`const`指针'{自定义名称，官方名称不知道}
+
+```c
+    int rain[23] = {1, 24, 3};
+    int zoo[3] = {};
+    const int * const ptr = rain;
+    ptr[1] = 55; // 编译报错，因为'指向`const`的指针不能改变值'
+    ptr = zoo; // 编译报错，因为 '`const`指针不能被二次赋值'
+```
