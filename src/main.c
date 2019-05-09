@@ -7,6 +7,7 @@ int main(void)
 {
     int arr[SIZE] = {5, 6, 7, 8};
     printf("sum of arr = %d\n", sum(arr, SIZE));
+    // c 编译器实现保证了 arr + SIZE 对应的地址可以访问，但是对应的值未定义！
     printf("sum_arr = %d\n", sum_arr(arr,arr + SIZE));
 }
 
