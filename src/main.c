@@ -1,17 +1,34 @@
 #include <stdio.h>
 
-void handle_tr(double * trots, int size);
-void handle_cl(short (* ptr)[30], int row);
-void handle_sh(long (*ptr)[10][15], int x);
-
-void h_tr(int size, double * tr);
-void h_cl(int row, int size, short clops[][row]);
-
-void h_sh(int x,int y,int z, long shots[][y][z]);
+void show(const double ar[], int n);
+void show2(const double ar[2][3], int n);
 int main(void)
 {
-    double trots[20];
-    short clops[10][30];
-    long shots[5][10][15];
+
+    printf("printf show\n");
+    show((double []){8,3,9,2}, 4);
+    printf("printf show2\n");
+    show2((double [2][3]){{8, 3, 9}, {5, 4, 1}}, 2);
     return 0;
+}
+
+void show2(const double ar[][3], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            printf("%-3g", * (*(ar + i) + j));
+        }
+        printf("\n");
+    }
+}
+
+void show(const double ar[],int n)
+{
+    for(int i = 0; i < n ; i++)
+    {
+        printf("%-3g", ar[i]);
+    }
+    printf("\n");
 }
