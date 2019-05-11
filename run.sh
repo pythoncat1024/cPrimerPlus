@@ -27,6 +27,7 @@ else
     else
         cd ${PROJECT_PATH}
         ./${BUILD_SH}
+        echo "start to execute this program:"
         ./${build}"/"${TARGET}
     fi
 fi
