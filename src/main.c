@@ -1,34 +1,63 @@
 #include <stdio.h>
 
-void show(const double ar[], int n);
-void show2(const double ar[2][3], int n);
+void copy_arr(double * target, const double * source, int size);
+void copy_ptr(double * target, const double * source, int size);
+void copy_ptrs(double * target, const double * start, const double * end);
+void show_arr(const double * start, const double * end);
+
 int main(void)
 {
+    double source[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
+    double target1[5];
+    double target2[5];
+    double target3[5];
 
-    printf("printf show\n");
-    show((double []){8,3,9,2}, 4);
-    printf("printf show2\n");
-    show2((double [2][3]){{8, 3, 9}, {5, 4, 1}}, 2);
+    copy_arr(target1, source, 5);
+    copy_ptr(target2, source, 5);
+    copy_ptrs(target3, source, source + 5);
+    printf("show     src: ");
+    show_arr(source, source + 5);
+    printf("show target1: ");
+    show_arr(target1, target1 + 5);
+    printf("show target2: ");
+    show_arr(target2, target2 + 5);
+    printf("show target3: ");
+    show_arr(target3, target3 + 5);
     return 0;
 }
 
-void show2(const double ar[][3], int n)
+void copy_ptrs(double * target, const double * start,const double * end)
 {
-    for(int i = 0; i < n; i++)
+    while(start < end)
     {
-        for(int j = 0; j < 3; j++)
-        {
-            printf("%-3g", * (*(ar + i) + j));
-        }
-        printf("\n");
+        *target = *start;
+        target++;
+        start++;
     }
 }
 
-void show(const double ar[],int n)
+void copy_ptr(double * target, const double * source, int size)
 {
-    for(int i = 0; i < n ; i++)
+    for(int i = 0; i < size; i++)
     {
-        printf("%-3g", ar[i]);
+        *(target + i) = *(source +i);
+    }
+}
+
+void copy_arr(double * target, const double * source, int size)
+{
+    for(int i = 0; i < size; i++)
+    {
+        target[i] = source[i];
+    }
+}
+
+void show_arr(const double * start, const double *end)
+{
+    while(start < end)
+    {
+        printf("%-8g", *start);
+        start++;
     }
     printf("\n");
 }
