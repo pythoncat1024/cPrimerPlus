@@ -1,27 +1,18 @@
 #include <stdio.h>
 
-void oneline(const double * start, const double * end);
+void one_line(const double * start, const double * end);
 void show(const double (*arr)[3], int row);
 void copy(double * target, const double * start, const double * end);
 
 int main(void) {
-    double rain[4][3] = {
-            23.2, 12.4, 45.2,
-            21.7, 34.3, 27,
-            24.9, 38,   45.62,
-            9,    3,    1
-    };
-    double cp[4][3];
-    printf("show origin oneline :\n");
-    oneline( &rain[0][0], &rain[3][2]);
-    printf("show origin:\n");
-    show(rain, 4);
-    copy(&cp[0][0], &rain[0][0], &rain[3][2]);
-    printf("show copied:\n");
-    show(cp, 4);
-    printf("数组指针就是数组首元素的地址:\n");
-    copy(cp, rain, rain + 12);
-    show(cp, 4);
+
+    double arr[7] = {1, 2, 3, 4, 5, 6, 7};
+    double dest[3];
+    printf("show origin arr: ");
+    one_line(arr, arr + 7);
+    copy(dest, &arr[2], &arr[5]); // end 是不拷贝的
+    printf("show copied arr: ");
+    one_line(dest, dest + 3);
     return 0;
 }
 
@@ -45,7 +36,7 @@ void show(const double arr[][3], int row)
     }
 }
 
-void oneline(const double * start, const double * end)
+void one_line(const double * start, const double * end)
 {
    while(start < end)
    {
