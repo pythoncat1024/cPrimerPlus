@@ -1,43 +1,38 @@
 #include <stdio.h>
 
-void show_vla(int row,int col, const double (*arr)[row]);
-void copy_vla(int row,int col, double (*dest)[col], const double (*src)[col]);
+// 两个数组相加，结果存放到第三个数组中
+void add(int size, int * target, const int * arr1, const int * arr2);
+void show(const int * start, const int * end);
 
 int main(void)
 {
-    double arr[3][5] = {
-        {1.1, 2.1, 3.1, 4.1, 5.1},
-        {1.2, 2.2, 3.2, 4.2, 5.2},
-        {1.3, 2.3, 3.3, 4.3, 5.3}
-    };
-    double target[3][5];
-    printf("show origin arr:\n");
-    show_vla(3, 5, arr);
-    printf("show copied arr:\n");
-    copy_vla(3, 5, target, arr);
-    show_vla(3, 5, target);
+    int odd[4] = {1, 3, 5, 7};
+    int couple[4] = {2, 4, 6, 8};
+    int added[4];
+    printf("arr 1: ");
+    show(odd, odd + 4);
+    printf("arr 2: ");
+    show(couple, couple + 4);
+
+    printf("added: ");
+    add(4, added, odd, couple);
+    show(added, added + 4);
     return 0;
 }
 
-void copy_vla(int row, int col, double (*dest)[col], const double (*src)[col])
+void add(int n, int * target, const int * arr1, const int * arr2)
 {
-    const double * start  = &src[0][0];
-    const double * end = start + row * col;
-    double * ptr = &dest[0][0];
-    while(start < end)
+    for(int i = 0; i < n; i++)
     {
-        *ptr++ = *start++;
+        *(target +i) = *(arr1 +i) + *(arr2 +i);
     }
 }
 
-void show_vla(int row, int col, const double (*arr)[col])
+void show(const int * start, const int * end)
 {
-    for(int i = 0; i < row; i++)
+    while(start < end)
     {
-        for(int j = 0; j < col; j++)
-        {
-            printf("%5.1f", arr[i][j]);
-        }
-        printf("\n");
+        printf("%3d", *start++);
     }
+    printf("\n");
 }
