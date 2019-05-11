@@ -11,3 +11,6 @@ aux_source_directory(src DIR_SOURCES)
 
 # 6 将源文件目录下的全部文件编译成指定生成目标
 add_executable(cPrimerPlus ${DIR_SOURCES})
+
+# 7 编译模式为 debug ,否则 CLion 中无法断点
+set(CMAKE_BUILD_TYPE Debug)
