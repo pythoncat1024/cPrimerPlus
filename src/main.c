@@ -1,46 +1,43 @@
 #include <stdio.h>
 
-void one_line(const double * start, const double * end);
-void show(const double (*arr)[3], int row);
-void copy(double * target, const double * start, const double * end);
+void show_vla(int row,int col, const double (*arr)[row]);
+void copy_vla(int row,int col, double (*dest)[col], const double (*src)[col]);
 
-int main(void) {
-
-    double arr[7] = {1, 2, 3, 4, 5, 6, 7};
-    double dest[3];
-    printf("show origin arr: ");
-    one_line(arr, arr + 7);
-    copy(dest, &arr[2], &arr[5]); // end 是不拷贝的
-    printf("show copied arr: ");
-    one_line(dest, dest + 3);
+int main(void)
+{
+    double arr[3][5] = {
+        {1.1, 2.1, 3.1, 4.1, 5.1},
+        {1.2, 2.2, 3.2, 4.2, 5.2},
+        {1.3, 2.3, 3.3, 4.3, 5.3}
+    };
+    double target[3][5];
+    printf("show origin arr:\n");
+    show_vla(3, 5, arr);
+    printf("show copied arr:\n");
+    copy_vla(3, 5, target, arr);
+    show_vla(3, 5, target);
     return 0;
 }
 
-void copy(double * target, const double * start, const double * end)
+void copy_vla(int row, int col, double (*dest)[col], const double (*src)[col])
 {
+    const double * start  = &src[0][0];
+    const double * end = start + row * col;
+    double * ptr = &dest[0][0];
     while(start < end)
     {
-        *target++ = *start++;
+        *ptr++ = *start++;
     }
 }
 
-void show(const double arr[][3], int row)
+void show_vla(int row, int col, const double (*arr)[col])
 {
     for(int i = 0; i < row; i++)
     {
-        for(int k = 0; k < 3; k++)
+        for(int j = 0; j < col; j++)
         {
-            printf("%6.1f", arr[i][k]);
+            printf("%5.1f", arr[i][j]);
         }
         printf("\n");
     }
-}
-
-void one_line(const double * start, const double * end)
-{
-   while(start < end)
-   {
-        printf("%6.1f", *start++);
-   }
-   printf("\n");
 }
