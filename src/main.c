@@ -1,40 +1,54 @@
 #include <stdio.h>
+#define SIZE 5
+// 数组排序
+void sort(double * arr, int n, int desc);
+void show(const double * arr, int n);
 
-// 打印输出数组
-void oneline(double * arr, int n);
-// 返回最大元素下标
-int max_of_index(double *arr, int n);
 int main(void)
 {
-    double arr[5] = {23.4, 12.4, 37.4, 4.4, 9.4};
-    int index = max_of_index(arr, 5);
-    printf("max ele index in arr[");
-    oneline(arr, 5);
-    printf("] =  %d\n", index);
+    double arr[SIZE] = {23.1, 34.2, 15.4, 56.3, 9};
+    printf("origin arr     :");
+    show(arr, SIZE);
+    sort(arr, SIZE, 0);
+    printf("sorted arr aesc:");
+    show(arr, SIZE);
+    printf("sorted arr desc:");
+    sort(arr, SIZE, 1);
+    show(arr, SIZE);
     return 0;
 }
-int max_of_index(double * arr, int n)
+
+void sort(double * arr, int n, int desc)
 {
-    double max = arr[0];
-    int index = 0;
+    // 倒序排列数组元素
+    double temp;
+    double s;
     for(int i = 0; i < n; i++)
     {
-        if(max < arr[i])
+        temp = arr[0];
+        for(int j = 1; j < n-i; j++)
         {
-            max = arr[i];
-            index = i;
+            int condition = desc ? (temp < arr[j]) : (temp > arr[j]);
+            if(condition)
+            {
+                s = arr[j - 1];
+                arr[j-1] = arr[j];
+                arr[j] = s;
+            }
+            temp = arr[j];
         }
     }
-    return index;
+
 }
-void oneline(double * arr, int n)
+
+void show(const double * arr, int n)
 {
     for(int i = 0; i < n; i++)
     {
-        if( i == n-1 )
-            printf("%4g", *(arr + i));
+        if(i == n -1)
+            printf("%5g",arr[i]);
         else
-            printf("%4g,", *(arr + i));
+            printf("%5g,", arr[i]);
     }
+    printf("\n");
 }
-
