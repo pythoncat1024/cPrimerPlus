@@ -1,54 +1,55 @@
 #include <stdio.h>
-#define SIZE 5
-// 数组排序
-void sort(double * arr, int n, int desc);
-void show(const double * arr, int n);
 
-int main(void)
-{
-    double arr[SIZE] = {23.1, 34.2, 15.4, 56.3, 9};
-    printf("origin arr     :");
-    show(arr, SIZE);
-    sort(arr, SIZE, 0);
-    printf("sorted arr aesc:");
-    show(arr, SIZE);
-    printf("sorted arr desc:");
-    sort(arr, SIZE, 1);
-    show(arr, SIZE);
+void oneline(const double * start, const double * end);
+void show(const double (*arr)[3], int row);
+void copy(double * target, const double * start, const double * end);
+
+int main(void) {
+    double rain[4][3] = {
+            23.2, 12.4, 45.2,
+            21.7, 34.3, 27,
+            24.9, 38,   45.62,
+            9,    3,    1
+    };
+    double cp[4][3];
+    printf("show origin oneline :\n");
+    oneline( &rain[0][0], &rain[3][2]);
+    printf("show origin:\n");
+    show(rain, 4);
+    copy(&cp[0][0], &rain[0][0], &rain[3][2]);
+    printf("show copied:\n");
+    show(cp, 4);
+    printf("数组指针就是数组首元素的地址:\n");
+    copy(cp, rain, rain + 12);
+    show(cp, 4);
     return 0;
 }
 
-void sort(double * arr, int n, int desc)
+void copy(double * target, const double * start, const double * end)
 {
-    // 倒序排列数组元素
-    double temp;
-    double s;
-    for(int i = 0; i < n; i++)
+    while(start < end)
     {
-        temp = arr[0];
-        for(int j = 1; j < n-i; j++)
-        {
-            int condition = desc ? (temp < arr[j]) : (temp > arr[j]);
-            if(condition)
-            {
-                s = arr[j - 1];
-                arr[j-1] = arr[j];
-                arr[j] = s;
-            }
-            temp = arr[j];
-        }
+        *target++ = *start++;
     }
-
 }
 
-void show(const double * arr, int n)
+void show(const double arr[][3], int row)
 {
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < row; i++)
     {
-        if(i == n -1)
-            printf("%5g",arr[i]);
-        else
-            printf("%5g,", arr[i]);
+        for(int k = 0; k < 3; k++)
+        {
+            printf("%6.1f", arr[i][k]);
+        }
+        printf("\n");
     }
-    printf("\n");
+}
+
+void oneline(const double * start, const double * end)
+{
+   while(start < end)
+   {
+        printf("%6.1f", *start++);
+   }
+   printf("\n");
 }
