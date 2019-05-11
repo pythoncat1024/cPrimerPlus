@@ -1,38 +1,43 @@
 #include <stdio.h>
 
-// 两个数组相加，结果存放到第三个数组中
-void add(int size, int * target, const int * arr1, const int * arr2);
-void show(const int * start, const int * end);
+void added(int (*arr)[5], int row);
+void show(const int (*arr)[5], int row);
 
 int main(void)
 {
-    int odd[4] = {1, 3, 5, 7};
-    int couple[4] = {2, 4, 6, 8};
-    int added[4];
-    printf("arr 1: ");
-    show(odd, odd + 4);
-    printf("arr 2: ");
-    show(couple, couple + 4);
-
-    printf("added: ");
-    add(4, added, odd, couple);
-    show(added, added + 4);
+    int arr[3][5] = {
+        {1, 2, 3, 4, 5},
+        {2, 4, 6, 8, 10},
+        {1, 3, 5, 7, 9}
+    };
+    printf("show origin:\n");
+    show(arr, 3);
+    printf("show  added:\n");
+    added(arr, 3);
+    show(arr, 3);
     return 0;
 }
 
-void add(int n, int * target, const int * arr1, const int * arr2)
+void added(int (*arr)[5], int row)
 {
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < row; i++)
     {
-        *(target +i) = *(arr1 +i) + *(arr2 +i);
+        for(int j = 0; j < 5; j++)
+        {
+            arr[i][j] *= 2;
+            *(*(arr +i) + j) *=1;
+        }
     }
 }
 
-void show(const int * start, const int * end)
+void show(const int (*arr)[5], int row)
 {
-    while(start < end)
+    for(int i = 0; i < row; i++)
     {
-        printf("%3d", *start++);
+        for(int j = 0; j < 5; j++)
+        {
+            printf("%4d", *(*(arr + i) + j));
+        }
+        printf("\n");
     }
-    printf("\n");
 }
