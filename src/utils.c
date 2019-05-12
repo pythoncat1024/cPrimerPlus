@@ -7,18 +7,22 @@
 char * s_gets(char * str, int n)
 {
     char * ptr = fgets(str, n, stdin);
-    for(int i = 0; i < n; i++)
-    {
-        if(*(ptr + i) == '\0')
+    // 如果是空行，返回值统一处理
+    if( '\n' == *ptr )
+        ptr = NULL;
+    else
+        for(int i = 0; i < n; i++)
         {
-            break;
+            if(*(ptr + i) == '\0')
+            {
+                break;
+            }
+            else if(*(ptr + i) == '\n')
+            {
+                *(ptr + i) = '\0';
+                break;
+            }
         }
-        else if(*(ptr + i) == '\n')
-        {
-            *(ptr + i) = '\0';
-            break;
-        }
-    }
     return ptr;
 
 }
