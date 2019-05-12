@@ -4,6 +4,24 @@
 #include "utils.h"
 #include <stdio.h>
 
+char * s_gets(char * str, int n)
+{
+    char * ptr = fgets(str, n, stdin);
+    for(int i = 0; i < n; i++)
+    {
+        if(*(ptr + i) == '\0')
+        {
+            break;
+        }
+        else if(*(ptr + i) == '\n')
+        {
+            *(ptr + i) = '\0';
+            break;
+        }
+    }
+    return ptr;
+
+}
 void print_some() {
     printf("this is an useless method,only print this line.\n");
 }
