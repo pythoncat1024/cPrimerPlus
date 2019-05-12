@@ -1,67 +1,33 @@
 #include <stdio.h>
 
-void input(int row, int col, double (*arr)[col]);
+int main(void)
+{
+    int arr1[] = {1, 2, 3};
+    char arr2[] = "hello world";
+    char * ptr3 = "c primer plus";
+    const int * par1 = arr1;
+    const char * par2 = arr2;
+    par1++;
+    par2++;
+    printf("arr1 = %p, par1 = %p\n", arr1, par1);
+    printf("arr2 = %p, par2 = %p\n", arr2, par2);
+    arr1[0] = 24;
+    *(arr1 + 1) = 31;
+    arr2[0] = 'H';
+    ++par2;
+    *(arr2 + 5) = 'M';
 
-void show(int row, int col, const double (*arr)[col]);
+    printf("arr2 = %s, *par2 = %c\n", arr2, *par2);
+    printf("*ptr2 = %c\n", *ptr3);
+    // *ptr3 = 'd'; // 'char * ptr3' 实际上是 'const char * ptr3'
+    char ch = 'x';
+    ptr3 = &ch; // 所以可以看出来，字符串指针实际上是 const char * str 类型
+    // 不是 char const * str 类型
+    //arr2 = ptr3;// 类型不匹配:
+    char const arr5[] ="hello world";
+    // arr5 = arr2; // 报错, arr5 是常量了，跟前面的 const 修饰没有关系
+    // arr5[1] = 'C'; 报错// 数组表示法中 char const arr[n]; 相当于 const char arr[n]
+    // 因为 c 中数组名就是常量，不能被改变了，所以加 const 就相当于 'const char const * arr'
 
-double avg(const double *start, int length);
-
-double max(const double *start, int length);
-
-int main(void) {
-    double arr[3][5];
-    input(3, 5, arr);
-    printf("# arr :\n");
-    show(3, 5, arr);
-    double average = avg((double *) arr, 3 * 5);
-    double m = max((double *) arr, 3 * 5);
-
-    printf("avg = %g, max = %g\n", average, m);
     return 0;
-}
-
-double max(const double *start, int n) {
-    double max = *start;
-    const double *end = start + n;
-    while (start < end) {
-        if (max < *start) {
-            max = *start;
-        }
-        start++;
-    }
-    return max;
-}
-
-double avg(const double *start, int n) {
-    double total = 0;
-    const double *end = start + n;
-    while (start < end) {
-        total += *start;
-        start++;
-    }
-    return total / n;
-}
-
-void input(int row, int col, double (*arr)[col]) {
-    int ch;
-    for (int i = 0; i < row; i++) {
-        printf("请输入第%d组数字(每组%d个,回车结束输入)：", i + 1, 5);
-        // 这样写死是5个了，处理方便一点
-        while (col != scanf("%lf %lf %lf %lf %lf",
-                            &arr[i][0], &arr[i][1], &arr[i][2],
-                            &arr[i][3], &arr[i][4])) {
-            while ((ch = getchar()) != '\n')
-                putchar(ch);
-            printf(" is not valid input!\nPlease try again: ");
-        }
-    }
-}
-
-void show(int row, int col, const double (*arr)[col]) {
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            printf("%5.1lf", arr[i][j]);
-        }
-        printf("\n");
-    }
 }
