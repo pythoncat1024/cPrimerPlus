@@ -4,10 +4,10 @@
 int main(void)
 {
     const char * huge = "duck like java";
-    const char * key = "like";
+    const char key = 'k';
 
-    char * ss = strpbrk(huge, key);
+    char * ss = strrchr(huge, key);
 
-    printf("find '%s' in '%s' = '%s'\n", key, huge, ss);
+    printf("r find '%c' in '%s' = '%s'\n", key, huge, ss);
     return 0;
 }
