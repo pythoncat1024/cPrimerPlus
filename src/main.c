@@ -1,17 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#define SIZE 191
 
 int main(void)
 {
+    const char * huge = "duck like java";
+    const char * key = "like";
 
-    char line[SIZE] = "hello world!";
-    char * ptr = "duck like java more.";
-    char ch = 'e';
-    char * index = strchr(line, ch);
-    char * index2 = strchr(ptr, ch);
-    printf("index = %s, index2 = %s\n", index, index2);
-    char * ss = strchr("duck", 'A');
-    printf(" find 'A' in \"duck\" = %s\n", ss);
+    char * ss = strpbrk(huge, key);
+
+    printf("find '%s' in '%s' = '%s'\n", key, huge, ss);
     return 0;
 }
