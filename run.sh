@@ -18,6 +18,9 @@ then
     echo "start to execute this program:"
     echo ""
     cd ${PROJECT_PATH}
+    echo "ls build dir start"
+    ls -l ${build}
+    echo "ls build dir end##"
     ./${build}"/"${TARGET}
 else
     echo "NEED build first"
@@ -27,6 +30,9 @@ else
     else
         cd ${PROJECT_PATH}
         ./${BUILD_SH}
+        echo "ls build dir start"
+        ls ${build}
+        echo "ls build dir end##"
         echo "start to execute this program:"
         ./${build}"/"${TARGET}
     fi
