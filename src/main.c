@@ -4,10 +4,7 @@
 int main(void)
 {
     const char * huge = "duck like java";
-    const char * key = "like";
-
-    char * ss = strstr(huge, key);
-
-    printf("find '%s' in '%s' = '%s'\n", key, huge, ss);
+    size_t len = strlen(huge);
+    printf("len of %s = %zd\n", huge, len);
     return 0;
 }
