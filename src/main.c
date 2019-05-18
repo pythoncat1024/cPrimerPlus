@@ -1,13 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(int argc, char * argv[]) {
-
-    char note[] = "See you at the snack bar.";
-    char * ptr = note;
-    puts(ptr);
-    puts(++ptr);
-    note[7] = '\0';
-    puts(note);
-    puts(++ptr);
+    char food[] = "Yummy";
+    char * ptr = food + strlen(food);
+    while( --ptr >= food )
+        puts(ptr);
     return 0;
 }
