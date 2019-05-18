@@ -2,9 +2,11 @@
 #include <string.h>
 
 int main(int argc, char * argv[]) {
-    char food[] = "Yummy";
-    char * ptr = food + strlen(food);
-    while( --ptr >= food )
-        puts(ptr);
+    char gold[40] = "art of it all ";
+    char samuel[40] = "I read p";
+    const char * quote = "the way throuth.";
+    strcat(gold, quote);
+    strcat(samuel, gold);
+    puts(samuel);
     return 0;
 }
