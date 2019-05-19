@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 void s_gets(char * str, int n);
 
@@ -17,4 +18,11 @@ void s_gets(char * str, int n) {
     fgets(str, n, stdin);
     if( strlen(str) > n )
         *(str + n) = '\0';
+    else
+        for(int i = 0; i < strlen(str); i++) {
+            if(isspace(*(str + i))) {
+                *(str + i) = '\0';
+                break;
+            }
+        }
 }
