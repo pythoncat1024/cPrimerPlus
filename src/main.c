@@ -1,10 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 int main(int argc, char * argv[]) {
 
-    printf("revert args\n");
-    for(int i = argc - 1; i > 0; i--) {
-        printf("%s\t", argv[i]);
+    if(argc -1 < 2)
+        puts("count of args must >= 2");
+    else {
+        char * end;
+        double d = strtod(argv[1], &end);
+        long b = strtol(argv[2], &end, 10);
+        double r = pow(d,b);
+        printf("arg1 = %g, arg2 = %ld, result = %g\n", d, b, r);
     }
     return 0;
 }
