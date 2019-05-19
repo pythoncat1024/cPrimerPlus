@@ -1,28 +1,30 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
+#include "../include/utils.h"
 
-void s_gets(char * str, int n);
-
+const char * fstrchr(const char * str, const char key);
 int main(int argc, char * argv[]) {
-
-    printf("input some words:\n");
-    int n = 50;
-    char arr[21];
-    s_gets(arr, n);
-    printf("arr = %s\n", arr);
+    printf("input what you want. empty line to quit:\n");
+    char arr[56];
+    char key;
+    const char * find;
+    while(s_gets(arr, 56) && 1 == scanf("%c", &key)) {
+        while(getchar() !='\n')
+            continue;
+        find = fstrchr(arr, key);
+        printf("arr=[%s],key=[%c],find=[%s]\n", arr, key, find);
+    }
+    puts("Done.");
     return 0;
 }
 
-void s_gets(char * str, int n) {
-    fgets(str, n, stdin);
-    if( strlen(str) > n )
-        *(str + n) = '\0';
-    else
-        for(int i = 0; i < strlen(str); i++) {
-            if(isspace(*(str + i))) {
-                *(str + i) = '\0';
-                break;
-            }
-        }
+const char * fstrchr(const char * str, const char key) {
+    while(*str) {
+        if(*str == key)
+            return str;
+        str++;
+    }
+    return (const char *)NULL;
+
 }
+
