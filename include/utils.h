@@ -16,4 +16,5 @@ void binary(int n);
  */
 char * s_gets(char * str, int max);
 
+char * strrevert(char * str);
 #endif //CPRIMERPLUS_PIG_H

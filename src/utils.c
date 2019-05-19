@@ -3,6 +3,19 @@
 //
 #include "utils.h"
 #include <stdio.h>
+#include <string.h>
+
+char * strrevert(char * str) {
+    int n = strlen(str);
+    char arr[n];
+    for(int i = 0; i < n; i++) {
+        arr[i] = *(str + i);
+    }
+    for(int i = 0; i < n; i++) {
+        *(str + i) = arr[n -1 - i];
+    }
+    return str;
+}
 
 char * s_gets(char * str, int n)
 {
