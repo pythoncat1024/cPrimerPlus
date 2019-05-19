@@ -2,11 +2,10 @@
 #include <string.h>
 
 int main(int argc, char * argv[]) {
-    char gold[40] = "art of it all ";
-    char samuel[40] = "I read p";
-    const char * quote = "the way throuth.";
-    strcat(gold, quote);
-    strcat(samuel, gold);
-    puts(samuel);
+    char ch = 'c';
+    char * ptr = "c";
+    printf("%zd, %zd\n", sizeof(ch), sizeof(ptr));
+    printf("%zd, %zd\n", sizeof((char)'q'), sizeof((char *)"q"));
+    printf("%zd, %zd\n", sizeof('q'), sizeof("q"));
     return 0;
 }
