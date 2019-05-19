@@ -1,11 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 
+void s_gets(char * str, int n);
+
 int main(int argc, char * argv[]) {
-    char ch = 'c';
-    char * ptr = "c";
-    printf("%zd, %zd\n", sizeof(ch), sizeof(ptr));
-    printf("%zd, %zd\n", sizeof((char)'q'), sizeof((char *)"q"));
-    printf("%zd, %zd\n", sizeof('q'), sizeof("q"));
+
+    printf("input some words:\n");
+    int n = 50;
+    char arr[21];
+    s_gets(arr, n);
+    printf("arr = %s\n", arr);
     return 0;
+}
+
+void s_gets(char * str, int n) {
+    fgets(str, n, stdin);
+    if( strlen(str) > n )
+        *(str + n) = '\0';
 }
