@@ -1,48 +1,37 @@
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
+#include <stdlib.h>
 
-int main(int argc, char * argv[]) {
-    printf("input multi lines:\n");
-    char str[1000];
-    char ch;
-    int pos;
-    int menu;
-    if( argc == 1 )
-        menu = 0;
-    else if(strcmp("-p", argv[1]) == 0)
-        menu = 0;
-    else if(strcmp("-u", argv[1]) == 0)
-        menu = 1;
-    else if(strcmp("-l", argv[1]) == 0)
-        menu = 2;
-    else
-        menu = 0;
-    switch(menu) {
-        case 0:
-            while((ch = getchar()) != EOF && pos < 1000) {
-                str[pos] = ch;
-                pos++;
-            }
-            puts("###################");
-            printf("%s\n", str);
-            break;
-        case 1:
-            while((ch = getchar()) != EOF && pos < 1000) {
-                str[pos] = toupper(ch);
-                pos++;
-            }
-            puts("###################");
-            printf("%s\n", str);
-            break;
-        case 2:
-            while((ch = getchar()) != EOF && pos < 1000) {
-                str[pos] = tolower(ch);
-                pos++;
-            }
-            puts("###################");
-            printf("%s\n", str);
-            break;
-    }
+char h = 'd';
+static char k = 'z';
+
+int main(void) {
+
+    puts("input a number:");
+    int x;
+    register int y;
+    scanf("%d", &x);
+    // register var 不能访问其地址
+    int *arr;
+    arr = (int *) malloc(sizeof(int) * 10);
+    arr[0] = 12;
+    arr[1] = 23;
+    free(arr);
+    arr = (int *) calloc(sizeof(int), 8);
+    arr[5] = 33;
+    arr[6] = 44;
+    free(arr);
+    static int m = 33;
+    extern char h;
+    h = 'e';
+
+    char *restrict str = (char *) malloc(sizeof(char) * 6);
+    // restrict var 只能通过指针访问
+    *str = 'a';
+    *(str + 1) = 'b';
+    y = 29;
+    printf("%c, %d, %d, %s\n", h, y, k, str);
+    free(str);
+    int *am = (int *) malloc(sizeof(int) * 21);
+    free(am);
     return 0;
 }
