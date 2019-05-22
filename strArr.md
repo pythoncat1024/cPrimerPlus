@@ -390,3 +390,23 @@ void op_strings() {
 ```
 
 完整代码：[字符串数组与二维`int`数组](https://gist.github.com/pythoncat1024/ac8129f6e2e387d953bbe1e39ca5bb50)
+
+但是，以上处理可能不是常规的方式，看大佬的处理方案是这样的：
+
+```c
+/*
+ * from: https://www.zhihu.com/question/302824062/answer/540278677
+ * 若编译／运行环境不容许使用 VLA，或者要控制生命周期的话，
+ * C 语言并没有在语言层面提供动态二维数组的功能。
+ * 一般做法是自行分配一块内存，使用时自行计算下标：
+ */
+void f(size_t N, size_t M) {
+    int *A = (int*)malloc(N * M * sizeof(int));
+    int i, j;
+    for (i = 0; i < N; i++)
+        for (j = 0; j < M; j++)
+            A[i * M + j] = /* ... */;
+    /* ... */
+    free(A); /* 也可不释放，返回给调用方 */
+}
+```
