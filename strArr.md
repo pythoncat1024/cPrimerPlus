@@ -351,3 +351,42 @@ int menu() {
 ```
 
 > **特别注意上面的 `main()` 以及 `sort_by_first()`.**
+
+##### 区分二维数组 与 字符串数组
+
+> 一个元素是一维数组，而一个元素的指针
+```c
+
+void op_arr() {
+    const int COL = 3;
+    int (*arr)[COL];
+    arr = (int (*)[COL])malloc(sizeof(int) * SIZE * COL);
+    for(int i = 0; i < SIZE; i++) {
+        for(int j = 0; j < COL; j++) {
+            arr[i][j] = (i+1) * 10 + (j + 1);
+            // printf("===============%p\n", &arr[i][j]);
+        }
+    }
+    show_arr(SIZE, COL, arr);
+    free(arr);
+}
+
+void op_strings() {
+    char ** strings;
+    char * ele = "hello world";
+    strings = (char **)calloc(sizeof(char *), SIZE);
+    for(int i = 0; i < SIZE; i++) {
+        strings[i] = (char *)calloc(sizeof(char),strlen(ele) + 1);
+        strncpy(strings[i], ele, strlen(ele));
+    }
+    // 创建一个数组 strings ,并且每个元素的值为 "hello world";
+    show((const char **)strings, SIZE);
+    for(int i = 0; i < SIZE; i++) {
+        free(strings[i]);
+    }
+    free(strings);
+}
+
+```
+
+完整代码：[字符串数组与二维`int`数组](https://gist.github.com/pythoncat1024/ac8129f6e2e387d953bbe1e39ca5bb50)
