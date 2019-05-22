@@ -7,8 +7,9 @@ void free_arr(int row, char ** str);
 
 int main(void) {
     char * tp[] = {
-            "how", "old","are", "you", "I'm", "fine"
-    };
+        "how", "old","are", "you", "I'm", "fine"
+    }; // 注意，这里并不能定义成 char ** tp;
+    show(3, (const char **)tp);
     const int size = 3;
     char ** strings;
     strings = (char **)malloc(sizeof(char *) * size);
@@ -22,10 +23,10 @@ int main(void) {
     return 0;
 }
 void free_arr(int row, char ** str) {
-    for(int i = 0; i < row; i++) {
+     for(int i = 0; i < row; i++) {
         free(str[i]);
-    }
-    free(str);
+     }
+     free(str);
 }
 
 void show(int row, const char ** strings) {

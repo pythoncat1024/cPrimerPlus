@@ -410,3 +410,54 @@ void f(size_t N, size_t M) {
     free(A); /* 也可不释放，返回给调用方 */
 }
 ```
+
+
+大佬毕竟也有很多的局限性：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void show_arr(int row, int col, const int ** arr);
+void free_arr(int row, int ** arr);
+
+int main(void) {
+
+    const int row = 2;
+    const int col = 4;
+    int ** arr;
+    arr = (int **)malloc(sizeof(int *) * row);
+    for(int i = 0; i < row; i++) {
+        arr[i] = (int *)malloc(sizeof(int) * col);
+        for(int j = 0; j < col; j++) {
+            arr[i][j] = 10 *(i + 1) + (j + 1);
+        }
+    }
+    show_arr(row, col, (const int **)arr);
+    free_arr(row, arr);
+    return 0;
+}
+void free_arr(int row, int ** arr) {
+    for(int i = 0; i < row; i++) {
+        free(arr[i]);
+    }
+    free(arr);
+}
+void show_arr(int row, int col, const int ** arr) {
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < col; j++) {
+            printf("%d,\t", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+```
+> 输出如下：
+
+```
+11,	12,	13,	14,
+21,	22,	23,	24,
+```
+
+
