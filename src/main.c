@@ -1,54 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#define SIZE 15
-void collect_random(int size, int * arr, int min, int max);
-void sort(int size,int * arr);
-void show(int size, const int * arr);
+#include <string.h>
 
 int main(void) {
-    int * arr = (int *)calloc(sizeof(int), SIZE);
-    collect_random(SIZE, arr, 1, 10);
-    puts("show origin:");
-    show(SIZE, arr);
-    sort(SIZE, arr);
-    puts("show sorted:");
-    show(SIZE, arr);
-    free(arr);
+
+    printf("how many words do you wish to enter: ");
+    int count;
+    scanf("%d", &count);
+    char * * str;
+    str = (char **)malloc(sizeof(char**) * count);
+    printf("Enter %d words now:\n", count);
+    puts("I enjoyed doing this exerise");
+    const int len = 40;
+    char tmp[40];
+    for(int i = 0; i < count; i++) {
+        scanf("%s", tmp);
+        str[i] = (char *)malloc((strlen(tmp) +1) * (sizeof(char)));
+        strncpy(str[i], tmp, strlen(tmp));
+    }
+    puts("Here are your words:");
+    for(int i = 0; i < count; i++) {
+        puts(str[i]);
+        free(str[i]);
+    }
+    free(str);
     return 0;
 }
-
-void show(int size, const int * arr) {
-    for(int i = 0; i < size; i++) {
-        if(i> 0 && i % 10 == 0)
-            puts("");
-        printf("%d, ", arr[i]);
-    }
-    puts("");
-}
-void sort(int size,int * arr) {
-    for(int i = 0; i < size - 1; i++) {
-        for(int j = 0; j < size - 1 - i; j++) {
-            if(arr[j] < arr[j+1]) {
-                int tmp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = tmp;
-            }
-        }
-    }
-}
-
-void collect_random(int size, int * arr, int min, int max) {
-    if(max <= min) {
-        printf("max must > min!\n");
-    }
-    printf("time=%ld\n", time(0));
-    for(int i = 0; i < size; i++) {
-        // srand((unsigned int) time(0));
-        long r = rand();
-        r %= (max - min);
-        r += min;
-        arr[i] = r;
-    }
-}
-
