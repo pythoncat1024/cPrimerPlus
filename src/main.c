@@ -1,36 +1,27 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-void show(int row, const char ** strings);
-void free_arr(int row, char ** str);
+int main(int argc, char * argv[]) {
 
-int main(void) {
-    char * tp[] = {
-            "how", "old","are", "you", "I'm", "fine"
-    };
-    const int size = 3;
-    char ** strings;
-    strings = (char **)malloc(sizeof(char *) * size);
-    for(int i = 0; i < size; i++) {
-        strings[i] = (char *)malloc(sizeof(char) * (strlen(tp[i]) +1));
-        strncpy(strings[i], tp[i], strlen(tp[i]) + 1);
-        *(strings[i] + strlen(tp[i])) = '\0';
+    int ch;
+    long count = 0;
+    FILE * fp;
+    if(argc < 2) {
+        printf("I need a file path in args!\n");
+        exit(EXIT_FAILURE);
+    } else if((fp = fopen(argv[1],"r")) == NULL) {
+        printf("%s is not a file!\n", argv[1]);
+    } else {
+        while((ch = getc(fp)) != EOF) {
+            // putc(ch, stdout);
+            count++;
+        }
+
+        if (0 != fclose(fp)) {
+            printf("Error in close %s\n", argv[1]);
+        }else {
+            printf("file %s has %ld count chars.\n", argv[1], count);
+        }
     }
-    show(size, (const char **)strings);
-    free_arr(size, strings);
     return 0;
-}
-void free_arr(int row, char ** str) {
-    for(int i = 0; i < row; i++) {
-        free(str[i]);
-    }
-    free(str);
-}
-
-void show(int row, const char ** strings) {
-    for(int i = 0; i < row; i++) {
-        printf("[%s] ", strings[i]);
-    }
-    printf("\n");
 }
