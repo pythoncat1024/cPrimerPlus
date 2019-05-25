@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX 1024 * 6
 
@@ -33,6 +34,10 @@ int main(int argc, char *argv[]) {
     while (1) {
         if (loop % 2 == 0 && e1 == 0) {
             if (fgets(line, MAX, f1)) {
+                char * ch = strchr(line,'\n');
+                if(ch != NULL && e2 == 0) {
+                    *ch = '\0'; //如果第二个文件已经读完了，就还是保持换行
+                }
                 fputs(line, stdout);
                 fseek(f1, 0L, SEEK_CUR); // 可有可无
             } else {
