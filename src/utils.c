@@ -6,9 +6,15 @@
 #include <string.h>
 #include <stdlib.h>
 #define BUFFER_SIZE 1024 * 8
-int __operate_file(const char * src_path, const char * dst_path, const char * mode) {
+int __operate_file(const char * src_path, const char * dst_path, const char * mode, const int binary) {
     FILE * src, * dst;
-    if((src = fopen(src_path, "r")) == NULL) {
+    const char * read_mode;
+    if(binary) {
+        read_mode = "rb";
+    } else {
+        read_mode = "r";
+    }
+    if((src = fopen(src_path, read_mode)) == NULL) {
         fprintf(stderr, "src file [%s] not exists\n", src_path);
         return EXIT_FAILURE;
     }
@@ -42,12 +48,24 @@ int __operate_file(const char * src_path, const char * dst_path, const char * mo
 
 }
 
-int copy_file(const char * src_path, const char * dst_path) {
-    return __operate_file(src_path, dst_path, "w");
+int copy_file(const char * src_path, const char * dst_path, int binary) {
+    const char * mode;
+    if(binary) {
+        mode = "wb";
+    } else {
+        mode = "w";
+    }
+    return __operate_file(src_path, dst_path, mode, binary);
 }
 
-int append_file(const char * src_path, const char * dst_path) {
-    return __operate_file(src_path, dst_path, "a+");
+int append_file(const char * src_path, const char * dst_path, int binary) {
+    const char * mode;
+    if(binary) {
+        mode = "ab+";
+    } else {
+        mode = "a+";
+    }
+    return __operate_file(src_path, dst_path, mode, binary);
 }
 
 char * strrevert(char * str) {

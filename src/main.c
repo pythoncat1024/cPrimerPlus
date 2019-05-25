@@ -1,29 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../include/utils.h"
 
 int main(int argc, char * argv[]) {
     if(argc != 3) {
-        fprintf(stderr, "need one key and one path, like grep -n key file.txt\n");
+        fprintf(stderr, "need one source path and one path, like abc.dat file.tt\n");
         exit(EXIT_FAILURE);
     }
-    const char * key = argv[1];
-    const char * fname = argv[2];
-    FILE * fp;
-    if((fp = fopen(fname, "r")) == NULL) {
-        fprintf(stderr, "[%s] is not a file\n", fname);
-        exit(EXIT_FAILURE);
-    }
-    const int max_line = 1024 * 10;
-    char line[max_line];
-    int row = 0;
-    while(fgets(line, max_line, fp)) {
-        row++;
-        if(strstr(line, key)) {
-            printf("%d:", row);
-            fputs(line, stdout);
-        }
-    }
-
+    copy_file(argv[1], argv[2], 1);
     return 0;
 }
