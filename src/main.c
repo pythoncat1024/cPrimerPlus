@@ -1,40 +1,66 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#define LINE_MAX 1024 * 5
+
+#define MAX 1024 * 6
+
 void fail() { exit(EXIT_FAILURE); }
 
-int main(int argc, char * argv[]) {
-    if(argc < 2) {
-        fprintf(stderr, "i need command args about showing file paths\n");
+int main(int argc, char *argv[]) {
+
+    if (argc != 3) {
+        puts("I need two file path in command args");
         fail();
     }
-    FILE * fp;
-    for(int i = 1; i < argc; i++) {
-        if((fp = fopen(argv[i], "r")) == NULL) {
-            fprintf(stderr, "[%s] is not a file\n", argv[i]);
-            fail();
-        } else {
-            // file open success
-            fprintf(stdout, "##### index of %d/%d file, named [%s], and content:\n",
-                    i, argc-1, argv[i]);
-            static char line[LINE_MAX];
-            long size = LINE_MAX;
-            while(fgets(line, size, fp)) {
+    FILE *f1, *f2;
+    if ((f1 = fopen(argv[1], "r")) == NULL) {
+        fprintf(stderr, "[%s] is not a readable file.\n", argv[1]);
+        fail();
+    }
+    if ((f2 = fopen(argv[2], "r")) == NULL) {
+        fprintf(stderr, "[%s] is not a readable file.\n", argv[1]);
+        fail();
+    }
+//    int v1 = setvbuf(f1, NULL, _IOFBF, MAX);
+//    int v2 = setvbuf(f2, NULL, _IOFBF, MAX);
+//    if (v1 || v2) {
+//        fprintf(stderr, "error occoured when create buf for file [%s] or [%s]\n", argv[1], argv[2]);
+//        fail();
+//    } // setvbuf  也是可有可无的
+    static char line[MAX];
+    long int loop = 0;
+    int e1 = 0;
+    int e2 = 0;
+    while (1) {
+        if (loop % 2 == 0 && e1 == 0) {
+            if (fgets(line, MAX, f1)) {
                 fputs(line, stdout);
-                if(ferror(fp)) {
-                    fprintf(stderr, "error appeared when read file [%s]\n", argv[i]);
-                    fail();
-                }
-            }
-            if(feof(fp)) {
-                fclose(fp);
+                fseek(f1, 0L, SEEK_CUR); // 可有可无
             } else {
-                fprintf(stderr, "error appeared after read file [%s]\n", argv[i]);
-                fail();
+                //  == null ,文件已经读完
+                e1 = 1;
+            }
+
+        } else if (e2 == 0) {
+            if (fgets(line, MAX, f2)) {
+                fputs(line, stdout);
+                fseek(f2, 0L, SEEK_CUR);
+            } else {
+                //  == null ,文件已经读完
+                e2 = 1;
             }
         }
+        if (e1 && e2) {
+            break;
+        }
+        loop++;
     }
-    puts("DONE!");
+    puts("######## DONE ########");
+
+    if (0 == fclose(f1)) {
+        printf("---------------- close [%s]\n", argv[1]);
+    }
+    if (0 == fclose(f2)) {
+        printf("---------------- close [%s]\n", argv[2]);
+    }
     return 0;
 }
