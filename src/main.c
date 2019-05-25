@@ -1,55 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define BUFFER_SIZE 1024 * 10
+typedef FILE File;
 
-#define LEN 14
-#define EXT ".cp" // 后缀名
+void append(File * src, File * dst);
 
-int main(int argc, char *argv[]) {
-    fprintf(stdout, "copy a file:\n");
+// 追加文件到目标文件
+int main(int argc, char * argv[]) {
 
-    char name[LEN];
-    int ch;
-    long count = 0;
-    FILE *fp; // origin file
-    FILE *fout; // origin.cp file
-    if (argc < 2) {
-        printf("I need a file path in args!\n");
+    if(argc < 2) {
+        fprintf(stderr, "execute with source path and dst path\n");
+    }
+    for(int i = 1; i < argc; i++) {
+        puts(argv[i]);
+    }
+    File *dst = fopen(argv[argc - 1],"a+");
+    if(dst == NULL) {
+        fprintf(stderr,"open %s fail\n", argv[argc - 1]);
         exit(EXIT_FAILURE);
-    } else if ((fp = fopen(argv[1], "r")) == NULL) {
-        printf("%s is not a file!\n", argv[1]);
-    } else {
-        int name_OK = 0;
-        if (strncpy(name, argv[1], LEN - strlen(EXT))) {
-            if (strlen(name) > LEN - strlen(EXT)) {
-                name[LEN - (strlen(EXT) + 1)] = '\0';
+    }
+    for(int i = 1; i < argc-1; i++) {
+        File * src;
+        if((src = fopen(argv[i], "r")) != NULL) {
+            fprintf(stdout, "start to append [%s] to [%s]\n", argv[i], argv[argc - 1]);
+            append(src, dst);
+            if(feof(src) == 0) {
+                fprintf(stderr, "error to close [%s]\n", argv[i]);
+                exit(EXIT_FAILURE);
             }
-            size_t size = LEN - strlen(name) + 1;
-            if (strncat(name, EXT, size)) {
-                name_OK = 1;
-            }
-        }
-        if (!name_OK) {
-            fprintf(stderr, "define output file name %s fail.\n", name);
-            exit(EXIT_FAILURE);
-        }
-        if ((fout = fopen(name, "w")) == NULL) {
-            fprintf(stderr, "create file %s fail.\n", name);
-            exit(EXIT_FAILURE);
-        }
-
-        while ((ch = getc(fp)) != EOF) {
-            putc(ch, fout);
-            // count++;
-        }
-
-        if (0 != fclose(fp)) {
-            fprintf(stderr, "Error in close %s\n", argv[1]);
-        } else if (0 != fclose(fout)) {
-            fprintf(stderr, "Error in close %s\n", name);
-        } else {
-            fprintf(stdout, "src file [%s] \ncopied to \ndst file [%s]\n", argv[1], name);
+            fclose(src);
         }
     }
+    fclose(dst);
+    puts("Done.");
     return 0;
+}
+
+void append(File * src, File * dst) {
+    rewind(dst); // 可有可无
+    static char buf[BUFFER_SIZE];
+    int vb = setvbuf(src, buf, _IOFBF, BUFFER_SIZE); // buf 可为 NULL
+    if(vb != 0) {
+        fprintf(stderr, "setvbuf for src file fail\n");
+        exit(EXIT_FAILURE);
+    }
+    size_t read;
+    while((read = fread(buf, sizeof(char), BUFFER_SIZE, src)) > 0) {
+        fwrite(buf, sizeof(char), read, dst);
+    }
 }
