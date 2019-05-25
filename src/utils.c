@@ -4,6 +4,51 @@
 #include "utils.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#define BUFFER_SIZE 1024 * 8
+int __operate_file(const char * src_path, const char * dst_path, const char * mode) {
+    FILE * src, * dst;
+    if((src = fopen(src_path, "r")) == NULL) {
+        fprintf(stderr, "src file [%s] not exists\n", src_path);
+        return EXIT_FAILURE;
+    }
+    // rewind(src);
+    int vb = setvbuf(src, NULL, _IOFBF, BUFFER_SIZE);
+    if(vb) {
+        fprintf(stderr, "error to setvbuf for file [%s]\n", src_path);
+        fclose(src);
+        return EXIT_FAILURE;
+    }
+    dst = fopen(dst_path, mode);
+    static char buf[BUFFER_SIZE];
+    int read;
+    while((read = fread(buf, sizeof(char), BUFFER_SIZE, src)) > 0) {
+        fwrite(buf, sizeof(char), read, dst);
+        if(ferror(src) || ferror(dst)) {
+            // != 0, if error appeared
+            fprintf(stderr,"error appeared when copy [%s] to [%s]\n",
+                    src_path, dst_path);
+        }
+    }
+    if(feof(src) == 0) {
+        // != 0, if arrive file end
+        fprintf(stderr, "error occoured after copy in file [%s]\n", src_path);
+        // TODO: need delete dst file here
+        return EXIT_FAILURE;
+    }
+    fclose(src);
+    fclose(dst);
+    return EXIT_SUCCESS;
+
+}
+
+int copy_file(const char * src_path, const char * dst_path) {
+    return __operate_file(src_path, dst_path, "w");
+}
+
+int append_file(const char * src_path, const char * dst_path) {
+    return __operate_file(src_path, dst_path, "a+");
+}
 
 char * strrevert(char * str) {
     int n = strlen(str);
