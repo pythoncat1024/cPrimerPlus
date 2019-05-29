@@ -1,38 +1,31 @@
 #include <stdio.h>
-#include <string.h>
 
-typedef struct lens {
-    float foclen;
-    float fstop;
-    char brand[30];
-} LENS;
+struct name {
+    char first[20];
+    char last[20];
+};
+struct bem {
+    int limbs;
+    struct name title;
+    char type[30];
+};
 
-void inflate(LENS * arr, int size);
-void show(LENS *arr, int size);
-void print(LENS s);
-
+void show(struct bem bb);
+void print(struct bem * pb);
 int main(void) {
-    LENS arr[10] = {
-        {.brand = "DUCK"}, {.foclen = 33, .brand ="Potato" }
+
+    struct bem * pb;
+    struct bem deb = {
+        6, {"Berbnazel", "Gwolkpwolk"}, "Arcturan"
     };
-    // inflate(arr, 10);
-    show(arr, 10);
+    pb = &deb;
+    show(deb);
+    print(pb);
     return 0;
 }
-void inflate(LENS * arr, int size) {
-    for(int i = 0; i < size; i++) {
-        arr[i].foclen = 500;
-        arr[i].fstop = (float)1/2.0f;
-        strncpy(arr[i].brand, "Remarkata", 30);
-    }
+void print(struct bem * bb) {
+    printf("%s %s is a %d-limbed %s\n", bb->title.first, bb->title.last, bb->limbs, bb->type);
 }
-
-void show(LENS * arr, int size) {
-    for(int i = 0; i < size; i++) {
-        print(arr[i]);
-    }
-}
-
-void print(LENS s) {
-    printf("len=%g,\top=%g,\tbrand=%s\n", s.foclen, s.fstop, s.brand);
+void show(struct bem bb) {
+    printf("%s %s is a %d-limbed %s\n", bb.title.first, bb.title.last, bb.limbs, bb.type);
 }
