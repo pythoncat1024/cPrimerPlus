@@ -12,8 +12,10 @@ void show(LENS *arr, int size);
 void print(LENS s);
 
 int main(void) {
-    LENS arr[10];
-    inflate(arr, 10);
+    LENS arr[10] = {
+        {.brand = "DUCK"}, {.foclen = 33, .brand ="Potato" }
+    };
+    // inflate(arr, 10);
     show(arr, 10);
     return 0;
 }
@@ -32,5 +34,5 @@ void show(LENS * arr, int size) {
 }
 
 void print(LENS s) {
-    printf("len=%g,op=%g,brand=%s\n", s.foclen, s.fstop, s.brand);
+    printf("len=%g,\top=%g,\tbrand=%s\n", s.foclen, s.fstop, s.brand);
 }
