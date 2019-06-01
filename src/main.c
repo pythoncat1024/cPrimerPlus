@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-
+char * method(char * src, char key);
 int main(int argc, char * argv[]) {
-    enum choies {no = 0, yes, maybe};
-    enum choies chi = maybe;
-    printf("enum chi  = %d\n", chi);
+
+    // 声明一个函数指针 pf
+    char * (*pf)(char * src, char key);
     return 0;
 }
