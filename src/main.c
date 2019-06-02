@@ -1,35 +1,39 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-double add(double a, double b);
-double subtract(double a, double b);
-double multiply(double a, double b);
-double divide(double a, double b);
-int main(int argc, char * argv[]) {
-    double (*pa)(double,double);
+struct sname {
+    char name[40];
+    char middle[40];
+    char lastname[40];
+};
+typedef struct sname sn;
 
-    // 定义函数指针数组
-    double (*parr[4])(double,double) = {add, subtract, multiply, divide};
-    double added = parr[0](10, 2);
-    double multi = (*parr[2])(10, 2);
-    printf("added = %g, multi = %g, %d\n", added, multi, parr[3] == divide);
+struct smember {
+    char id[40];
+    sn name;
+};
+typedef struct smember sm;
+void show(sm * arr, int size);
+
+int main(void) {
+    sm arr[5] = {
+        {"1217459090", {"tom", "o", "lee"}},
+        {"1327955373", {"stone", "s", "ding"}},
+        {"1885645321", {"rose", "", "doctor"}},
+        {"1523421332", {"ann", "n", "victor"}},
+        {"1897643401", {"tony", "", "pig"}}
+    };
+    show(arr, 5);
     return 0;
 }
 
-double divide(double a, double b) {
-    if(b == 0) {
-        fprintf(stderr, "divider can not be zero!\n");
-        exit(EXIT_FAILURE);
+void show(sm * arr, int size) {
+    for(int i = 0; i < size; i++) {
+        sm item = arr[i];
+        if(strlen(item.name.middle)) {
+            printf("%s, %s %c. -- %s\n", item.name.lastname, item.name.name, *item.name.middle, item.id);
+        } else {
+            printf("%s, %s -- %s\n", item.name.lastname, item.name.name, item.id);
+        }
     }
-    return a / b;
-}
-double multiply(double a, double b) {
-    return a * b;
-}
-
-double subtract(double a, double b) {
-    return a - b;
-}
-double add(double a, double b) {
-    return a + b;
 }
