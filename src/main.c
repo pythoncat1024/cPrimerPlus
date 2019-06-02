@@ -1,39 +1,45 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-struct sname {
-    char name[40];
-    char middle[40];
-    char lastname[40];
+struct s_name {
+    char first[20];
+    char last[20];
 };
-typedef struct sname sn;
 
-struct smember {
-    char id[40];
-    sn name;
+struct student {
+    struct s_name name;
+    float grade[3];
+    float average;
 };
-typedef struct smember sm;
-void show(sm * arr, int size);
 
+void set_info(int size, struct student arr[]);
+void show_info(int size, struct student arr[]);
 int main(void) {
-    sm arr[5] = {
-        {"1217459090", {"tom", "o", "lee"}},
-        {"1327955373", {"stone", "s", "ding"}},
-        {"1885645321", {"rose", "", "doctor"}},
-        {"1523421332", {"ann", "n", "victor"}},
-        {"1897643401", {"tony", "", "pig"}}
-    };
-    show(arr, 5);
+    const int len = 1;
+    struct student students[len];
+    set_info(len, students);
+    show_info(len, students);
     return 0;
 }
 
-void show(sm * arr, int size) {
+void show_info(int size, struct student arr[]) {
     for(int i = 0; i < size; i++) {
-        sm item = arr[i];
-        if(strlen(item.name.middle)) {
-            printf("%s, %s %c. -- %s\n", item.name.lastname, item.name.name, *item.name.middle, item.id);
-        } else {
-            printf("%s, %s -- %s\n", item.name.lastname, item.name.name, item.id);
-        }
+        printf("%-20s %-20s [%-4.1f, %-4.1f, %-4.1f] %4.1f\n",
+                arr[i].name.first, arr[i].name.last,
+                arr[i].grade[0], arr[i].grade[1], arr[i].grade[2],
+                arr[i].average);
+    }
+}
+
+void set_info(int size, struct student arr[]) {
+    for(int i = 0; i < size; i++) {
+        struct student *stu = &arr[i];
+        printf("%d/%d: input first name: ", i+1, size);
+        scanf("%20s", stu->name.first);
+        printf("%d/%d input last name: ", i+1, size);
+        scanf("%20s", stu->name.last);
+        printf("%d/%d input 3 grades: ", i+1, size);
+        scanf("%f %f %f", &(stu->grade[0]), &(stu->grade[1]), &(stu->grade[2]));
+        stu->average = (stu->grade[0] + stu->grade[1] + stu->grade[2]) / 3;
     }
 }
