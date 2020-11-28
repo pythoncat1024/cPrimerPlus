@@ -8,6 +8,8 @@ function run {
     echo ""
     echo "args in function run: $@"
     ./$@
+    echo ''
+    echo "END###"
 }
 # run.sh 将 CLion 的运行逻辑，用脚本执行
 echo "start to build now!"
