@@ -3,6 +3,7 @@
 function run {
     # 查找 ${build} 目录下可执行文件，并执行
     # shell 函数的参数也是通过 $@,$1,$2 这样获取的
+    clear
     echo "start to execute this program now ####"
     echo ""
     echo "args in function run: $@"

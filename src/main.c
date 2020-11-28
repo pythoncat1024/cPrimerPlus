@@ -3,10 +3,15 @@
 
 int main(int argc, char *argv[])
 {
-    int quantity, price;
-    char array[20];
-    scanf("%d %d %s", &quantity, &price, array);
+    char arr[100];
+    printf("%s","input any thing...:\n");
+    
+    while (gets(arr) != NULL)
+    {
+        printf("%c", '+');
+        puts(arr);
+        printf("%s","input any thing...:\n");
+    }
 
-    printf("output:%d-%d-%s\n", quantity, price, array);
     return 0;
 }
