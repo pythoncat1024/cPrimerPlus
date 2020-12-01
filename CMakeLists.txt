@@ -17,5 +17,6 @@ add_executable(${TARGET} ${DIR_SOURCES})
 # 8 编译模式为 debug ,否则 CLion 中无法断点
 set(CMAKE_BUILD_TYPE Debug)
 # 支持 gdb 调试
-set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+# set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -lldb")
 set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
