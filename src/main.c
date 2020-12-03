@@ -1,37 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define LINE '\n'
+#define MAX_LENGTH 1000
 
 int main(int argc, char *argv[])
 {
     printf("%s\n", "input any long lines,you can:");
-    int ch;
-    int curr = 1, last = 0;
-    while ((ch = getchar()) != EOF)
+    int count = 0;
+    char inputs[MAX_LENGTH];
+    char reminds[MAX_LENGTH];
+
+    while (gets(inputs) != NULL)
     {
-        if (ch == LINE)
+        int size = strlen(inputs);
+        if (count < size)
         {
-            curr += 1;
+            count = size;
+            strncpy(reminds, inputs, size);
         }
-        else
-        {
-            if (curr > last)
-            {
-                printf("\t%d: ", curr);
-            }
-            if (last != curr)
-            {
-                last = curr;
-            }
-        }
-        putchar(ch);
     }
+
+    printf("max length of input is: [%s], length = [%d]\n", reminds, count);
 
     return EXIT_SUCCESS;
 }
-
-// fffhhhh\n
-// 1fffhhhh\n
-// dsdsddsd\n
-// 2
