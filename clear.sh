@@ -15,5 +15,6 @@ then
 fi
 # cmakelists.txt 修改之后默认生成一个 build/ 目录
 rm -rf build/
-echo "clear build complete!"
+clear
+echo "clear outputs complete!"
 echo "********************************************"
