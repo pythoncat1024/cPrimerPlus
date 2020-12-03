@@ -3,26 +3,23 @@
 function run {
     # 查找 ${build} 目录下可执行文件，并执行
     # shell 函数的参数也是通过 $@,$1,$2 这样获取的
-    clear
-    echo "start to execute this program now ####"
+    # clear
+    echo "RUN ------ start to execute this program now ####"
     echo ""
     echo "args in function run: $@"
     ./$@
     echo ''
-    echo "END###"
+    echo "RUN ------ END###"
 }
 # run.sh 将 CLion 的运行逻辑，用脚本执行
-echo "start to build now!"
-echo "current project path:"$(pwd)
 BUILD_SH='build.sh'
 PROJECT_PATH=$(pwd)
 PROJECT_NAME=$(basename `pwd`)
 APP="targetApp" # 生成的可执行文件的名称
-echo "current project name:${PROJECT_NAME}"
 
 # 清空{PROJECT}/build
 build="cmake-build-debug"
-TARGET=${PROJECT_NAME}
+TARGET=${APP}
 echo "target == "${TARGET}
 if [[ -d ${build} ]] && [[ -x ./${build}"/"${TARGET} ]]
 then
