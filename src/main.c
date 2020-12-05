@@ -10,11 +10,8 @@ int match(int a, int b)
     return a == b;
 }
 
-int main(int argc, char *argv[])
+void checkBraces()
 {
-
-    printf("check match of braces. INPUT:\n");
-
     int ch;
     int f = 0, s = 0;
     int stopLeftcollect = 0;
@@ -29,9 +26,9 @@ int main(int argc, char *argv[])
         {
             if (s > 0)
             {
-                if (match(f, s))
+                if (s <= f)
                 {
-                    f = 1;
+                    f = 1 + (f - s);
                     stopLeftcollect = 0;
                     s = 0;
                 }
@@ -71,9 +68,27 @@ int main(int argc, char *argv[])
             printf("======= #current line braces match FAIL#\n");
         }
     }
-    f = 0, s = 0;
-    while ((ch = getchar()) != EOF)
+    while (earlyFail && (ch = getchar()) != '\n')
+    {
         ;
+    }
+    if (ch == '\n')
+    {
+        printf("NEXT LINES\n");
+        checkBraces();
+    }
+    else
+    {
+        printf("who you are? %c\n", ch);
+        // logic error.
+        exit(EXIT_FAILURE);
+    }
+}
 
+int main(int argc, char *argv[])
+{
+
+    printf("check match of braces. INPUT:\n");
+    checkBraces();
     return 0;
 }
