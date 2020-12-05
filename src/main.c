@@ -10,18 +10,16 @@ int match(int a, int b)
     return a == b;
 }
 
-void checkBraces()
+void check(char *str)
 {
+    int len = strlen(str);
     int ch;
     int f = 0, s = 0;
     int stopLeftcollect = 0;
     int earlyFail = 0;
-    // 两种情况，一种： {a{b{c}d}e}
-    // 这种的处理方式就很简单，就是遇到第一个 } 就停止对{ 进行计数，并开始对 } 进行计数，结束后比较二者数量即可。
-    // 两种情况，二种： {s}{w}{k}
-    // 这种需要在第二个 { 的时候就比较前一次 的 {,}的数量然后清空计数再次分别统计。
-    while ((ch = getchar()) != EOF && ch != '\n')
+    for (int i = 0; i < len; ++i)
     {
+        ch = str[i];
         if (LEFT == ch)
         {
             if (s > 0)
@@ -52,10 +50,8 @@ void checkBraces()
             stopLeftcollect = 1;
             s++;
         }
-
-        // putchar(ch);
     }
-    printf("EXIT WHILE $$$$$$.\n");
+
     if (!earlyFail)
     {
 
@@ -68,27 +64,17 @@ void checkBraces()
             printf("======= #current line braces match FAIL#\n");
         }
     }
-    while (earlyFail && (ch = getchar()) != '\n')
-    {
-        ;
-    }
-    if (ch == '\n')
-    {
-        printf("NEXT LINES\n");
-        checkBraces();
-    }
-    else
-    {
-        printf("who you are? %c\n", ch);
-        // logic error.
-        exit(EXIT_FAILURE);
-    }
 }
 
 int main(int argc, char *argv[])
 {
 
-    printf("check match of braces. INPUT:\n");
-    checkBraces();
+    char str[1000];
+    while (gets(str) != NULL)
+    {
+        printf("origin: %s\n", str);
+        check(str);
+    }
+
     return 0;
 }
