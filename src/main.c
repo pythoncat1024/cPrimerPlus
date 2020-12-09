@@ -3,17 +3,39 @@
 #include <string.h>
 #include <math.h>
 
+int isPrimeNumber(int n)
+{
+    int bingo = 0;
+    for (int i = 2; i < n / 2 + 1; ++i)
+    {
+        if (n % i == 0)
+        {
+            bingo = 1;
+            break;
+        }
+    }
+    return bingo ? 0 : 1;
+}
+
 int main(int argc, char *argv[])
 {
 
-    double n = 21;
-    printf("input one number to compute it's sqart.\n");
-    scanf("%lf", &n);
-    for (double x = 1, y = (x + n / x) / 2.0; fabs(x - y) > 0.001;)
+    printf("check one number is a  prime number or not:\n");
+    int count = 0;
+    // 质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。
+    for (int i = 2; i < 100; ++i)
     {
-        x = y;
-        y = (x + n / x) / 2.0;
-        printf("n=%.2f\ty=%.5f\tx=%.5f\n", n, y, x);
+        // printf("i===%d\n", i);
+        int isPrime = isPrimeNumber(i);
+        if (isPrime)
+        {
+            printf("%d\t", i);
+            ++count;
+            if (count % 8 == 0)
+            {
+                printf("\n");
+            }
+        }
     }
     return 0;
 }
