@@ -6,18 +6,14 @@
 int main(int argc, char *argv[])
 {
 
-    double n;
+    double n = 21;
     printf("input one number to compute it's sqart.\n");
     scanf("%lf", &n);
-    double x = 1, y = (x + n / x) / 2.0;
-    while (fabs(x - y) > 0.001)
+    for (double x = 1, y = (x + n / x) / 2.0; fabs(x - y) > 0.001;)
     {
         x = y;
         y = (x + n / x) / 2.0;
         printf("n=%.2f\ty=%.5f\tx=%.5f\n", n, y, x);
-    };
-
-    printf("FINAL: n=%.2f\ty=%.5f\tx=%.5f\n", n, y, x);
-
+    }
     return 0;
 }
