@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define LENGTH 30
+#define LENGTH 100
 
 void copy_n(char dst[], char src[], int n);
 
@@ -20,22 +20,27 @@ int main(int argc, char *argv[])
 
 void copy_n(char dst[], char src[], int n)
 {
-    int ss = 0, i = 0;
+    int ss = 0, rest = 0, i = 0;
     while (src[i++] != '\0')
     {
         ss++;
     }
+    if (n > LENGTH)
+    {
+        n = LENGTH;
+    }
     if (n > ss)
     {
+        rest = n - ss;
         n = ss;
     }
     for (size_t i = 0; i < n; i++)
     {
         dst[i] = src[i];
     }
-    if (n < LENGTH)
+    if (rest > 0)
     {
-        for (size_t i = n; i < LENGTH; i++)
+        for (size_t i = n; i < rest; i++)
         {
             dst[i] = '\0';
         }
