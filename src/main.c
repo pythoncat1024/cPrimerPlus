@@ -3,39 +3,38 @@
 #include <string.h>
 #include <math.h>
 
-int isPrimeNumber(int n)
-{
-    int bingo = 0;
-    for (int i = 2; i < n / 2 + 1; ++i)
-    {
-        if (n % i == 0)
-        {
-            bingo = 1;
-            break;
-        }
-    }
-    return bingo ? 0 : 1;
-}
-
 int main(int argc, char *argv[])
 {
 
-    printf("check one number is a  prime number or not:\n");
-    int count = 0;
-    // 质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。
-    for (int i = 2; i < 100; ++i)
+    printf("check trigle! Please input three numbers:\n");
+    int a, b, c;
+    int ch;
+    while (scanf("%d %d %d", &a, &b, &c) == 3)
     {
-        // printf("i===%d\n", i);
-        int isPrime = isPrimeNumber(i);
-        if (isPrime)
+        printf("what's your inputs: %d,%d,%d\n", a, b, c);
+        if (a <= 0 || b <= 0 || c <= 0)
         {
-            printf("%d\t", i);
-            ++count;
-            if (count % 8 == 0)
-            {
-                printf("\n");
-            }
+            printf("不是三角形\n");
         }
+        else if (a == b && b == c)
+        {
+            printf("等边三角形\n");
+        }
+        else if (a == b || b == c || c == a)
+        {
+            printf("等腰三角形\n");
+        }
+        else if (a + b > c && a + c > b && b + c > a)
+        {
+            printf("普通三角形\n");
+        }
+        else
+        {
+            printf("不是三角形\n");
+        }
+        while (getchar() != '\n')
+            ;
     }
+
     return 0;
 }
