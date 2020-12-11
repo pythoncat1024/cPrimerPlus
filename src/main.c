@@ -1,43 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #define LENGTH 100
+
+int substr(char dst[], char src[], int start, int len);
+
+int slen(char target[])
+{
+    int s = 0;
+    while (target[s++] != '\0')
+        ;
+    return s - 1;
+}
 
 int main(int argc, char *argv[])
 {
-
-    printf("input a string as source string and counnt to copy.\n");
-    char line[LENGTH];
-    char prev[LENGTH];
-    int same = 0;
-    while (gets(line) != NULL)
+    char src[LENGTH], dst[LENGTH];
+    while (gets(src) != NULL)
     {
-        size_t size = strnlen(line, LENGTH);
-        if (strncmp(prev, line, size) == 0)
-        {
-            same++;
-            continue;
-            // puts(line);
-        }
-        else
-        {
-            if (same)
-            {
-                puts(prev);
-            }
-            same = 0;
-        }
-        strncpy(prev, line, size);
-        if (size < LENGTH)
-        {
-            // 这一句不加，显示就不正常。
-            prev[size] = '\0';
-        }
-    }
-    if (same)
-    {
-        puts(prev);
+        dst[0] = '\0';
+        int result = substr(dst, src, 5, 6);
+        printf("src==========[%s]\n", src);
+        printf("copied::[%u],[%s]\n\n", result, dst);
     }
 
     return EXIT_SUCCESS;
+}
+
+int substr(char dst[], char src[], int start, int len)
+{
+    size_t srcLen = slen(src);
+    size_t dstLen = slen(dst);
+
+    if (start < 0 || len < 0 || start > srcLen)
+    {
+        return slen(dst);
+    }
+    if (len > srcLen)
+    {
+        len = srcLen;
+    }
+    size_t pos;
+    if (dstLen + len > LENGTH)
+    {
+        pos = 0;
+    }
+    else
+    {
+        pos = dstLen;
+    }
+    // printf("---copy---[%zu],[%zu],[%u]---[%u]\n", pos, dstLen, start, len);
+    for (size_t i = 0; i < len; ++i)
+    {
+        dst[pos + i] = src[start + i];
+    }
+    if (pos + len < LENGTH)
+    {
+        dst[pos + len] = '\0';
+    }
+    return slen(dst);
 }
